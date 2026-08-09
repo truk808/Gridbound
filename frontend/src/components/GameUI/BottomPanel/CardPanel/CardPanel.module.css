@@ -1,0 +1,63 @@
+/*.cardPanel {*/
+/*    width: 100vw;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    gap: 30px*/
+/*}*/
+
+.cardPanel {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.deck {
+    width: 75px;
+    height: 125px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    border: 1px solid white;
+}
+
+/*.hand {*/
+/*    height: 150px;*/
+
+/*    display: flex;*/
+/*    gap: 10px;*/
+/*}*/
+
+.hand {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 0 -20px;
+}
+
+.hand > div {
+    margin-left: -25px;
+}
+
+.hand > div:first-child {
+    margin-left: 0;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+
+    border-radius: 15px;
+    border: 1px solid white;
+
+    text-align: center;
+}

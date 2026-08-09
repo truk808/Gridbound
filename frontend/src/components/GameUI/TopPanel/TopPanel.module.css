@@ -1,0 +1,13 @@
+.topPanel {
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+}
+
+.gameInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,104 @@
+.card {
+    position: relative;
+    width: 110px;
+    height: 155px;
+    background: #3a2e2b;
+    border: 2px solid #1a120f;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    user-select: none;
+    cursor: pointer;
+
+    transition: transform 0.2s ease, z-index 0s ease 0.2s;
+    will-change: transform;
+}
+
+.card:hover {
+    transform: translateY(-40px) scale(1.15);
+    z-index: 50;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.selected {
+    outline: 2px solid #4ade80;
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
+
+.header {
+    position: relative;
+    background: #e6c89c;
+    border: 1px solid #5a4033;
+    border-radius: 3px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
+
+.ap {
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #b83228 0%, #6e1510 100%);
+    border: 1px solid #e6c89c;
+    border-radius: 50%;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 10px;
+    color: #2b1b17;
+}
+
+.imageFrame {
+    width: 100%;
+    height: 60px;
+    background: #1a120f;
+    border: 1px solid #5a4033;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+
+.descriptionZone {
+    flex-grow: 1;
+    background: #d9be93;
+    border: 1px solid #5a4033;
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.descriptionText {
+    margin: 0;
+    font-size: 8px;
+    line-height: 1.1;
+    color: #2b1b17;
+    text-align: center;
+    font-weight: 600;
+}

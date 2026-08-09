@@ -1,0 +1,24 @@
+.arena {
+    color: red;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url('/assets/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    display: flex;
+    gap: 16px;
+    transform: translateY(-60px);
+}

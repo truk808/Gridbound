@@ -1,0 +1,54 @@
+.gameStats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 0 0 20px 0;
+}
+
+.ap,
+.nextTurn {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.barsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 250px;
+}
+
+.barGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bar {
+    width: 100%;
+    height: 16px;
+}
+
+.health {
+    background-color: #e51c23;
+}
+
+.armor {
+    background-color: #00a2ed;
+}
+
+.value {
+    color: #ff3b30;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 4px;
+}
