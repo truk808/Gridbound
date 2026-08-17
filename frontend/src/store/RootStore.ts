@@ -1,24 +1,20 @@
-import { createContext, useContext } from "react";
-import { GameStore } from "./GameStore";
-import { PlayerStore } from "./PlayerStore";
-import  {FieldStore} from "./FieldStore.ts";
-import {CharacterStore} from "./CharacterStore.ts";
-import  {CardStore} from "./CardsStore.ts";
+import {createContext, useContext} from "react";
+import {Game} from "../models/Game.ts";
+import type {IField} from "../types/IField.ts";
+import type {IPlayer} from "../types/IPlayers.ts";
 
 export class RootStore {
-    gameStore: GameStore;
-    playerStore: PlayerStore;
-    fieldStore: FieldStore;
-    characterStore: CharacterStore
-    cardStore: CardStore;
+    game: Game;
 
     constructor() {
-        this.gameStore = new GameStore(this);
-        this.playerStore = new PlayerStore(this);
-        this.fieldStore = new FieldStore(this);
-        this.characterStore = new CharacterStore(this);
-        this.cardStore = new CardStore(this);
+        this.game = new Game(this);
+
     }
+
+    get field(): IField {return this.game.field;}
+    get players(): readonly IPlayer[] {return this.game.players;}
+    get localPlayer(): IPlayer | null {return this.game.localPlayer;}
+    get activePlayer(): IPlayer | null {return this.game.activePlayer;}
 }
 
 export const rootStore = new RootStore();

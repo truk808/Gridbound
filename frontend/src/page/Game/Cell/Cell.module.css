@@ -25,9 +25,17 @@
     /*box-shadow: 0 0 15px rgba(74, 222, 128, 0.3);*/
 }
 
-.selected {
+/*.selected {*/
+/*    border-color: rgb(222 74 74 / 0.8);*/
+/*    box-shadow: 0 0 15px rgb(222 74 74 / 0.3);*/
+/*}*/
+
+.red {
     border-color: rgb(222 74 74 / 0.8);
-    box-shadow: 0 0 15px rgb(222 74 74 / 0.3);
+    box-shadow: 0 0 15px rgb(222 74 74 / 0.3)
 }
 
-
+.yellow {
+    border-color: rgb(222 220 74 / 0.8);
+    box-shadow: 0 0 15px rgb(222 220 74 / 0.3)
+}

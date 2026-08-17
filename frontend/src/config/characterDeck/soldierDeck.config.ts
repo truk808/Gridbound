@@ -1,20 +1,37 @@
+import {createCard} from "../../utils/createCard.ts";
 import type {ICard} from "../../types/ICard.ts";
-import {CARDS_CONFIG} from "../cards.config.ts"
 
 export const SOLDIER_DECK_CONFIG: ICard[] = [
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('REGENERATION'),
+    createCard('REGENERATION'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('ENERGY'),
+    createCard('ENERGY'),
 
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
+    createCard('AGILITY'),
+    createCard('AGILITY'),
+    createCard('AGILITY'),
+    createCard('STANCE'),
+    createCard('STANCE'),
+    createCard('DASH'),
+    createCard('DASH'),
+    createCard('FLASK_WITH_POISON'),
+    createCard('FLASK_WITH_POISON'),
+    createCard('FENCING'),
+    createCard('FENCING'),
+    createCard('FENCING'),
+    createCard('NEED_TO_THINK_ABOUT_IT'),
+    createCard('NEED_TO_THINK_ABOUT_IT'),
+];
 
-    CARDS_CONFIG['ENERGY'],
-    CARDS_CONFIG['ENERGY'],
-    CARDS_CONFIG['ENERGY'],
-]

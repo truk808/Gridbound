@@ -27,6 +27,7 @@
 .selected {
     outline: 2px solid #4ade80;
     box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+    transform: translateY(-40px) scale(1.15);
 }
 
 .header {

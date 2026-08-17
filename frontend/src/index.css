@@ -5,5 +5,9 @@ body {
 }
 
 :root {
-    --base-color: #00000;
+    --text-color-white: #d5d5d5;
+    --base-color: rgb(22 27 34);
+    --base-color-opacity-70: rgb(22 27 34 / 0.7);
+    --base-color-opacity-50: rgb(22 27 34 / 0.5);
+    --base-color-opacity-25: rgb(22 27 34 / 0.25);
 }

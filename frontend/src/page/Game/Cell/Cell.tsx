@@ -1,25 +1,24 @@
 import styles from './Cell.module.css';
-import { observer } from "mobx-react-lite";
-import type { ICell } from "../../../types/ICell.ts";
-import { useStore } from "../../../store/RootStore.ts";
+import {observer} from "mobx-react-lite";
+import type {ICell} from "../../../types/ICell.ts";
 import {SoldierSprite} from "../../../components/characters/Solider/SoldierSprite.tsx";
+import type {ICharacter} from "../../../types/character/ICharacter.ts";
 
 interface CellProps {
+    character: ICharacter | null;
     cell: ICell;
     onClick: () => void;
-    isSelect: boolean;
+    selectColorHighlight: "red" | "yellow" | null
 }
 
-const Cell = observer(({ cell, onClick, isSelect }: CellProps) => {
-    const { characterStore } = useStore();
-
-    const characterOnCell = characterStore.getCharacterByCellIndex(cell.x);
-
+const Cell = observer(({character, onClick, selectColorHighlight}: CellProps) => {
     return (
-        <div onClick={onClick} className={`${styles.cell} ${characterOnCell && styles.hasCharacter} ${isSelect && styles.selected}`}>
-            {characterOnCell && (
-                // <p>{characterOnCell.name}</p>
-                <SoldierSprite />
+        <div onClick={onClick}
+             className={`${styles.cell} ${character && styles.hasCharacter} ${selectColorHighlight && styles[selectColorHighlight]}`}>
+            {character && (
+                <SoldierSprite
+                    character={character}
+                />
             )}
         </div>
     );

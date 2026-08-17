@@ -1,6 +1,8 @@
 import styles from "./Card.module.css";
+import {observer} from "mobx-react-lite";
 
 interface CardProps {
+    onClick: () => void;
     ap?: number;
     name?: string;
     image?: string;
@@ -8,7 +10,8 @@ interface CardProps {
     isSelected?: boolean;
 }
 
-export const Card = ({
+export const Card = observer(({
+                         onClick,
                          ap = 4,
                          name = "Карта 4",
                          image = "/assets/card/sword.png",
@@ -16,7 +19,10 @@ export const Card = ({
                          isSelected = false,
                      }: CardProps) => {
     return (
-        <div className={`${styles.card} ${isSelected ? styles.selected : ""}`}>
+        <div
+            onClick={onClick}
+            className={`${styles.card} ${isSelected ? styles.selected : ""}`}
+        >
             <div className={styles.header}>
                 <div className={styles.ap}>{ap}</div>
                 <span className={styles.title}>{name}</span>
@@ -33,4 +39,4 @@ export const Card = ({
             </div>
         </div>
     );
-};
+});

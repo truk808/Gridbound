@@ -1,20 +1,32 @@
+import {createCard} from "../../utils/createCard.ts";
 import type {ICard} from "../../types/ICard.ts";
-import {CARDS_CONFIG} from "../cards.config.ts"
 
 export const ORC_DECK_CONFIG: ICard[] = [
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
-    CARDS_CONFIG['SWORD'],
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('HIT'),
+    createCard('REGENERATION'),
+    createCard('REGENERATION'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('BLOCK'),
+    createCard('ENERGY'),
+    createCard('ENERGY'),
 
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
-    CARDS_CONFIG['SHIELD'],
+    createCard('ORC_RAGE'),
+    createCard('ORC_RAGE'),
+    createCard('PAIN'),
+    createCard('HEAVY_HIT'),
+    createCard('KICK'),
+    createCard('KICK'),
+    createCard('DEAD_END'),
+    createCard('DEAD_END'),
+    createCard('MUSCLE_FLEXING'),
 
-    CARDS_CONFIG['ENERGY'],
-    CARDS_CONFIG['ENERGY'],
-    CARDS_CONFIG['ENERGY'],
 ]

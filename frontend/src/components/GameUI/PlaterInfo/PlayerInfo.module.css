@@ -1,0 +1,10 @@
+.playerInfo {
+}
+
+.info {
+    color: var(--text-color-white);
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+

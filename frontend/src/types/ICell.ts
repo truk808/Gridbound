@@ -1,4 +1,7 @@
 
 export interface ICell {
-    x: number;
+    readonly x: number;
+    isOwn: boolean;
+
+    setIsOwn(value: boolean): void;
 }

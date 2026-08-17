@@ -1,31 +1,42 @@
-import type {ICard} from "../types/ICard.ts";
+import type {ICardAction} from "../types/ICard.ts";
+import {conditions} from "../utils/conditions.ts";
 
-export const CARDS_CONFIG: Record<string, ICard> = {
-    SWORD: {
-        id: 'SWORD',
-        name: 'Меч',
-        description: 'Наносит 5 урона.',
+export interface ICardData {
+    readonly id: string;
+    readonly name: string;
+    readonly description: string;
+    readonly apCost: number;
+    readonly image: string;
+    readonly actions: ICardAction[];
+    readonly radius: number;
+}
+
+export const CARDS_CONFIG = {
+    HIT: {
+        id: 'HIT',
+        name: 'Удар',
+        description: 'Наносит 8 урона.',
         apCost: 1,
-        image: './assets/card/sword.png',
+        image: '',
         radius: 1,
         actions: [
             {
                 target: "object",
-                effects: [{damage: 5}]
+                effects: [{instant: {damage: 8}}]
             },
         ],
     },
-    SHIELD: {
-        id: 'SHIELD',
-        name: 'Щит',
-        description: 'Дает 3 защиты.',
+    BLOCK: {
+        id: 'BLOCK',
+        name: 'Блок',
+        description: 'Дает 4 защиты.',
         apCost: 1,
-        image: './assets/card/shield.png',
+        image: '',
         radius: 0,
         actions: [
             {
                 target: "object",
-                effects: [{armor: 3}]
+                effects: [{instant: {armor: 4}}]
             },
         ],
     },
@@ -33,15 +44,242 @@ export const CARDS_CONFIG: Record<string, ICard> = {
         id: 'ENERGY',
         name: 'Энергия',
         description: 'Дает 1 энергию.',
-        apCost: 1,
+        apCost: 0,
         image: './assets/card/energy.png',
         radius: 0,
         actions: [
             {
                 target: "object",
-                effects: [{energy: 1}]
+                effects: [{instant: {ap: 1}}]
             },
         ],
-    }
-
-}
+    },
+    REGENERATION: {
+        id: 'REGENERATION',
+        name: 'Регенерация',
+        description: 'Дает эффект регенерация 3ур на 3 хода.',
+        apCost: 2,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [{
+                    status: {
+                        status: "regeneration",
+                        duration: 3,
+                        level: 3,
+                    }
+                }]
+            },
+        ],
+    },
+    FLASK_WITH_POISON: {
+        id: 'FLASK_WITH_POISON',
+        name: 'Колба с ядом',
+        description: 'Дает эффект "ядовитый удар"',
+        apCost: 2,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [{
+                    status: {
+                        status: "poison_hit",
+                        duration: 1,
+                        level: 2,
+                    }
+                }]
+            },
+        ],
+    },
+    AGILITY: {
+        id: 'AGILITY',
+        name: 'Ловкость',
+        description: 'дает использовавшему 1 энергию и наносит 4 урона цели',
+        apCost: 1,
+        image: '',
+        radius: 1,
+        actions: [
+            {
+                target: "object",
+                effects: [{
+                    instant: {damage: 4}
+                }]
+            },
+            {
+                target: "subject",
+                effects: [{
+                    instant: {ap: 1}
+                }]
+            }
+        ],
+    },
+    STANCE: {
+        id: 'STANCE',
+        name: 'Стойка',
+        description: 'дает 10 защиты',
+        apCost: 1,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [{
+                    instant: {armor: 10}
+                }]
+            },
+        ],
+    },
+    DASH: {
+        id: 'DASH',
+        name: 'Рывок',
+        description: 'переместите персонажа на 2 клетке ',
+        apCost: 2,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [{
+                    instant: {move: 2}
+                }]
+            },
+        ],
+    },
+    FENCING: {
+        id: 'FENCING',
+        name: 'Фехтование',
+        description: 'наносит 1 урона 3 раза',
+        apCost: 1,
+        image: '',
+        radius: 1,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {instant: {damage: 1}},
+                    {instant: {damage: 1}},
+                    {instant: {damage: 1}},
+                ]
+            },
+        ],
+    },
+     NEED_TO_THINK_ABOUT_IT: {
+        id: 'NEED_TO_THINK_ABOUT_IT',
+        name: 'Нужно подумать',
+        description: 'Сбросьте эту карту и получите 2',
+        apCost: 0,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {instant: {takeCard: 1}},
+                    {instant: {takeCard: 1}},
+                ]
+            },
+        ],
+    },
+    ORC_RAGE: {
+        id: 'ORC_RAGE',
+        name: 'Ярость орка',
+        description: 'дает эффект ярость на 1 ход',
+        apCost: 1,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {status: {status: "rage", level: 2, duration: 1}}
+                ]
+            },
+        ],
+    },
+    PAIN: {
+        id: 'PAIN',
+        name: 'Боль',
+        description: 'Получите 8 урона и эффект ярость 3ур',
+        apCost: 2,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {status: {status: "rage", level: 3, duration: 1}}
+                ]
+            },
+        ],
+    },
+    HEAVY_HIT: {
+        id: 'HEAVY_HIT',
+        name: 'Тяжелый удар',
+        description: 'Наносит 20 урона цели',
+        apCost: 2,
+        image: '',
+        radius: 1,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {instant: {damage: 20}},
+                ]
+            },
+        ],
+    },
+    KICK: {
+        id: 'KICK',
+        name: 'Пинок',
+        description: 'наносит 4 урона и отталкивает цель на 1 клетку',
+        apCost: 1,
+        image: '',
+        radius: 1,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {instant: {damage: 4}},
+                    {instant: {move: 1}},
+                ]
+            },
+        ],
+    },
+    DEAD_END: {
+        id: 'DEAD_END',
+        name: 'Тупик',
+        description: 'Если цель находится в углу, накладывает эффект контузия на 2 хода',
+        apCost: 0,
+        image: '',
+        radius: 1,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {status: {status: 'stun', level: 1, duration: 2}},
+                ],
+                condition: conditions.isTargetInCorner
+            },
+        ],
+    },
+    MUSCLE_FLEXING: {
+        id: 'MUSCLE_FLEXING',
+        name: 'Игра мускулами',
+        description: 'дает эффекты на 2 хода: невосприимчивость и контузия',
+        apCost: 2,
+        image: '',
+        radius: 0,
+        actions: [
+            {
+                target: "object",
+                effects: [
+                    {status: {status: 'immunity', level: 1, duration: 2}},
+                    {status: {status: 'stun', level: 1, duration: 2}},
+                ],
+            },
+        ],
+    },
+} as const satisfies Record<string, ICardData>;

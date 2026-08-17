@@ -16,6 +16,9 @@ export const GameStats = () => {
                     <div className={`${styles.bar} ${styles.armor}`} />
                     <span className={styles.value}>75/100</span>
                 </div>
+                <div className={styles.status}>
+
+                </div>
             </div>
 
             <div className={styles.nextTurn}>

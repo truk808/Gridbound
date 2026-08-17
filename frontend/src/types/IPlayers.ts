@@ -1,11 +1,15 @@
 import type {ICharacter} from "./character/ICharacter.ts";
-import type {ICard} from "./ICard.ts";
+import type {IDeckManager} from "./IDeckManager.ts";
 
 export interface IPlayer {
-    id: number;
-    nickname: string;
+    readonly id: string;
+    readonly nickname: string;
+    ap: number;
     character: ICharacter | null;
-    hand: ICard[]
-    deck: ICard[]
-    discardPile: ICard[]
+    cards: IDeckManager;
+
+    removeAP(ap: number): void;
+    addAP(ap: number): void
+    setCharacter(character: ICharacter | null): void
+    setAP(ap: number): void
 }
