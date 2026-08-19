@@ -12,13 +12,14 @@ import {events} from "./EventBus.ts";
 export class Game implements IGame {
     readonly id: string = crypto.randomUUID();
     readonly field: IField = new Field();
-    private _winner: IPlayer | null = null;
+    private _hostId: string | null = null;
     private _state: GameStatus = "waiting";
     private _players: IPlayer[] = [];
     private _activePlayerId: string | null = null;
     private _localPlayerId: string | null = null;
     private _turn: number = 2;
     private _timeStart: number = 0;
+    private _winner: IPlayer | null = null;
 
     constructor() {
         makeAutoObservable(this);
@@ -33,6 +34,7 @@ export class Game implements IGame {
     get localPlayer(): IPlayer | null {return this.getPlayerById(this._localPlayerId);}
     get round(): number {return this._turn;}
     get timeStart(): number {return this._timeStart;}
+    get host(): IPlayer | null {return this.getPlayerById(this._hostId);}
 
     // !!!
     private handleCharacterDied = ({ character }: { character: ICharacter }) => {
@@ -58,6 +60,10 @@ export class Game implements IGame {
         this._localPlayerId = playerId;
     }
 
+    setHostId(hostId: string): void {
+        this._hostId = hostId;
+    }
+
     setActivePlayerId(playerId: string): void {
         this._activePlayerId = playerId;
         this._localPlayerId = playerId;
@@ -70,8 +76,8 @@ export class Game implements IGame {
     }
 
     isCanStart() {
-        if (this._players.length === 0) {
-            console.log('нет игроков')
+        if (this._players.length !== 2) {
+            console.log('нет игроков достаточного кол-ва игроков')
             return false;
         } else {
             for (const player of this._players) {
@@ -161,6 +167,11 @@ export class Game implements IGame {
             this.localPlayer?.setAP(3)
             this.localPlayer?.character?.setArmor(0)
         }
+    }
+
+    destroy() {
+        events.off('character:died', this.handleCharacterDied);
+        console.log("Старый экземпляр игры успешно уничтожен.");
     }
 
 }

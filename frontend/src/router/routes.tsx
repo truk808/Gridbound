@@ -1,7 +1,8 @@
 import type {ReactElement} from "react";
-import {Main} from "../page/Main.tsx";
+import {Main} from "../page/Main/Main.tsx";
 import {ROUTES} from "./const.ts";
 import {Game} from "../page/Game/Game.tsx";
+import Lobby from "../page/Lobby/Lobby.tsx";
 
 interface IRoute {
     path: string;
@@ -17,5 +18,8 @@ export const routes: IRoute[] = [
         element: <Game/>,
         path: ROUTES.GAME
     },
-
+    {
+        element: <Lobby/>,
+        path: ROUTES.LOBBY
+    }
 ]

@@ -7,8 +7,15 @@ export class RootStore {
     game: Game;
 
     constructor() {
-        this.game = new Game(this);
+        this.game = new Game();
+    }
 
+    newGame = (): void => {
+        if (this.game) {
+            this.game.destroy();
+        }
+
+        this.game = new Game();
     }
 
     get field(): IField {return this.game.field;}

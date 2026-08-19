@@ -14,7 +14,7 @@ export const Game = observer(() => {
     const {game, field} = useStore();
 
     useEffect(() => {
-        const p1 = new Player("Player 1", 100);
+        // const p1 = new Player("Player 1", 100);
         const p2 = new Player("Player 2", 3);
         const ch1 = new Character("s", 100);
         const ch2 = new Character("orc", 2);

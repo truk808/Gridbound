@@ -15,6 +15,7 @@ export interface IGame {
     players: IPlayer[]
     activePlayer: IPlayer | null
     localPlayer: IPlayer | null
+    host: IPlayer | null
     round: number
     timeStart: number
 
@@ -25,4 +26,7 @@ export interface IGame {
     playCard(card: Card | null, targetCell: ICell | null): void
     endTurn(): void
     setActivePlayerId(playerId: string): void
+    setHostId(hostId: string): void
+
+    destroy(): void
 }
