@@ -1,3 +1,4 @@
+import styles from './PlayerInfo.module.css'
 import {useEffect} from "react";
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../../store/RootStore.ts";
@@ -71,18 +72,16 @@ export const PlayersInfo = observer(() => {
     if (!gameStore.game) return
 
     return (
-        <div>
-            {(gameStore.game.players ?? []).map((player) => {
+        <div className={styles.players}>
+            {(gameStore.game.players).map((player) => {
                 const isLocal = player.id === gameStore.localPlayer?.id;
-                const selectedConfig = Object.values(CHARACTER_CONFIG).find(
-                    (c) => c.name === player.character?.name
-                );
+                const selectedConfig = Object.values(CHARACTER_CONFIG).find((c) => c.name === player.character?.name);
                 const selectedId = selectedConfig ? selectedConfig.id : null;
 
                 return (
-                    <div key={player.id}>
-                        <span>{player.nickname}</span>
-                        <div>
+                    <div key={player.id} className={styles.playerInfo}>
+                        <span className={styles.player}>{player.nickname}</span>
+                        <div className={styles.dropdownContainer}>
                             {isLocal ? (
                                 <Dropdown
                                     items={characterList}
@@ -94,10 +93,10 @@ export const PlayersInfo = observer(() => {
                                 <span>{player.character?.name || 'Выбирает персонажа...'}</span>
                             )}
                         </div>
+
                     </div>
                 );
             })}
-            <hr style={{padding: '10px 0 10px 0'}}/>
         </div>
     );
 });

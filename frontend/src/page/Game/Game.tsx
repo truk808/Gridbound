@@ -101,8 +101,8 @@ export const Game = observer(() => {
         };
 
             useEffect(() => {
-
-            }, []);
+                console.log('isHost', gameStore.isHost)
+            }, [gameStore]);
 
             if (!gameStore.game) {
                 console.log('нет игры')
@@ -120,7 +120,10 @@ export const Game = observer(() => {
                                         key={`cell_${cell.x}`}
                                         cell={cell}
                                         onClick={() => onClickHandle(cell)}
-                                        character={gameStore.getCharacterByCell(cell.x)}
+                                        character={{
+                                         char: gameStore.getCharacterByCell(cell.x),
+                                         flip: !gameStore.isHost && gameStore.game.,
+                                        }}
                                         selectColorHighlight={getColorHighlight(cell)}
                                     />
                                 )

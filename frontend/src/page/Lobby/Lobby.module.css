@@ -1,6 +1,30 @@
 .lobby {
     width: 100vw;
     height: 100vh;
-
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    flex-direction: column;
     background-color: var(--base-color);
+}
+
+.top {
+    width: 100%;
+    text-align: center;
+}
+
+.players {
+    height: 100%;
+}
+
+.bottom {
+
+}
+
+.start {
+    padding: 15px   ;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

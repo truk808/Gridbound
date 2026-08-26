@@ -1,0 +1,25 @@
+.players {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.playerInfo {
+    width: 400px;
+    height: 500px;
+    border: 2px solid var(--border-color);
+}
+
+.player {
+    text-align: center;
+    width: 100%;
+}
+
+.dropdownContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+

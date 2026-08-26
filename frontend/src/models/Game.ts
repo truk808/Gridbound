@@ -99,4 +99,8 @@ export class Game {
 
         return true;
     }
+
+    getCharacterByPlayer(playerId: string): ICharacterDTO | null {
+        return this.game?.players.find((player) => player.id === playerId).character;
+    }
 }

@@ -14,13 +14,15 @@ const Lobby = observer(() => {
     return (
         <div className={styles.lobby}>
             <div className={styles.top}>
-                <h1> Лобби  </h1>
+                <h1> Лобби </h1>
                 <span> lobby id: {param.id} </span>
                 <button onClick={copyId}>+</button>
             </div>
             {/*<div>Настройки</div>*/}
-            <div className={styles.buttom}>
-                <PlayersInfo />
+            <div className={styles.players}>
+                <PlayersInfo/>
+            </div>
+            <div className={styles.start}>
                 <StartGame/>
             </div>
         </div>
