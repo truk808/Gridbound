@@ -1,7 +1,9 @@
-import type {IPlayer} from "./IPlayers.ts";
 import type {ICell} from "./ICell.ts";
 import type {ICharacter} from "./character/ICharacter.ts";
 import type {IInstantEffect, IStatusEffect} from "./IEffect.ts";
+import type {IPlayer} from "./IPlayer";
+import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+import type {IField} from "./IField";
 
 export interface ICardTypeEffect {
     instant?: IInstantEffect;
@@ -34,6 +36,12 @@ export interface ICard {
     readonly radius: number;
 
     isCanUse(caster: IPlayer, targetCell: ICell | null): boolean
-    applyEffects(caster: IPlayer, targetCharacter: ICharacter | null): void
+
+    applyEffects(caster: IPlayer, targetCharacter: ICharacter | null, field: IField, targetCell: ICell | null): void
+
+    toDTO(): ICardDTO;
 }
+
+export type ICardDTO = DeepFieldsOnly<ICard>
+export type ICardActionDTO = DeepFieldsOnly<ICardAction>
 

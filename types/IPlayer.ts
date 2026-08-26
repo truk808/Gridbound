@@ -1,5 +1,6 @@
 import type {ICharacter} from "./character/ICharacter.ts";
 import type {IDeckManager} from "./IDeckManager.ts";
+import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
 
 export interface IPlayer {
     readonly id: string;
@@ -12,4 +13,8 @@ export interface IPlayer {
     addAP(ap: number): void
     setCharacter(character: ICharacter | null): void
     setAP(ap: number): void
+
+    toDTO(): IPlayerDTO
 }
+
+export type IPlayerDTO = DeepFieldsOnly<IPlayer>

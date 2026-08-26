@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import type {Card} from "./Card.ts";
-import type {ICard} from "../types/ICard.ts";
-import type {IDeckManager} from "../types/IDeckManager.ts";
+import type {ICard} from "../../../types/ICard.ts";
+import type {IDeckManager} from "../../../types/IDeckManager.ts";
 
 export class DeckManager implements IDeckManager{
     private _deck: ICard[] = [];
@@ -29,10 +29,6 @@ export class DeckManager implements IDeckManager{
 
     setSelectedCard(selectedCard: ICard | null): void {
         this.selectedCard = selectedCard;
-    }
-
-    setDeck(deck: ICard[]) {
-        this._deck = deck.sort(() => Math.random() - 0.5);
     }
 
     getSortedDeck(): ICard[] {

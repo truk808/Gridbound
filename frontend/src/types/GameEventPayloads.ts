@@ -1,7 +1,7 @@
-import type { IPlayer } from './IPlayers.ts';
-import type { ICard } from './ICard.ts'
-import type { ICell } from './ICell.ts';
-import type {ICharacter} from "./character/ICharacter.ts";
+import type { IPlayer } from '../../../types/IPlayers.ts';
+import type { ICard } from '../../../types/ICard.ts'
+import type { ICell } from '../../../types/ICell.ts';
+import type {ICharacter} from "../../../types/character/ICharacter.ts";
 
 export type GameEventPayloads = {
     'character:moved'?: { player: IPlayer; from: ICell; to: ICell; cost: number };

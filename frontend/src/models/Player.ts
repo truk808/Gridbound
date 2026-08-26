@@ -1,17 +1,18 @@
 import {DeckManager} from "./DeckManager.ts";
 import {makeAutoObservable} from "mobx";
-import type {IPlayer} from "../types/IPlayers.ts";
-import type {ICharacter} from "../types/character/ICharacter.ts";
-import type {IDeckManager} from "../types/IDeckManager.ts";
+import type {IPlayer} from "../../../types/IPlayers.ts";
+import type {ICharacter} from "../../../types/character/ICharacter.ts";
+import type {IDeckManager} from "../../../types/IDeckManager.ts";
 
 export class Player implements IPlayer {
-    readonly id: string = crypto.randomUUID();
+    readonly id: string;
     readonly nickname: string;
     private _ap: number;
     private _character: ICharacter | null = null;
     private _cards: IDeckManager;
 
-    constructor(nickname: string, maxAp: number = 3) {
+    constructor(nickname: string, maxAp: number = 3, id?: string) {
+        this.id = id || crypto.randomUUID();
         this.nickname = nickname;
         this._ap = maxAp;
         this._cards = new DeckManager();

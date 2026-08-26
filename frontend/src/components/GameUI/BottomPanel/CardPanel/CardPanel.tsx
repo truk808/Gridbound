@@ -1,13 +1,13 @@
 import styles from "./CardPanel.module.css"
 import {Card} from "../../../Card/Card.tsx";
-import type {ICard} from "../../../../types/ICard.ts";
+import type {ICardDTO} from "../../../../../../types/ICard.ts";
 import {observer} from "mobx-react-lite/src/observer.ts";
 import {useStore} from "../../../../store/RootStore.ts";
 import {useEffect, useState} from "react";
 import Modal from "../../../ui/modal/Modal.tsx";
 
 export const CardPanel = observer(() => {
-    const {game, localPlayer} = useStore()
+    const {gameStore} = useStore()
     const [isOpenModalDeck, setIsOpenModalDeck] = useState<boolean>(false)
     const [isOpenModalDiscardCards, setIsOpenModalDiscardCards] = useState<boolean>(false)
 
@@ -15,8 +15,13 @@ export const CardPanel = observer(() => {
         // console.log(game.players[0].cards.)
     }, []);
 
-    function onClickHandle(card: ICard) {
-        localPlayer?.cards.setSelectedCard(card)
+    function onClickHandle(card: ICardDTO) {
+        gameStore.setSelectedCell(null)
+        if(gameStore.selectedCard?.instanceId === card.instanceId) {
+            gameStore.setSelectedCard(null)
+            return;
+        }
+        gameStore.setSelectedCard(card)
         // if (players[0].cards.selectedCard) {
         //
         // } else {
@@ -32,10 +37,11 @@ export const CardPanel = observer(() => {
             >
                 <div className={styles.a}>
                     {
-                        localPlayer?.cards.getSortedDeck().map((card) => {
+                        gameStore.localPlayer?.cards.deck.map((card) => {
                             return <Card
                                 key={card.id}
-                                onClick={() => {}}
+                                onClick={() => {
+                                }}
                                 isSelected={false}
                                 name={card.name}
                                 image={card.image}
@@ -52,10 +58,11 @@ export const CardPanel = observer(() => {
             >
                 <div className={styles.a}>
                     {
-                        localPlayer?.cards.discardCards.map((card) => {
+                        gameStore.localPlayer?.cards.discardCards.map((card) => {
                             return <Card
                                 key={card.id}
-                                onClick={() => {}}
+                                onClick={() => {
+                                }}
                                 isSelected={false}
                                 name={card.name}
                                 image={card.image}
@@ -70,20 +77,23 @@ export const CardPanel = observer(() => {
             <div className={styles.deck} onClick={() => setIsOpenModalDeck(true)}>Колода</div>
             <div className={styles.hand}>
                 {
-                    game.players[0]?.cards.hand.map((card) => {
+                    gameStore.localPlayer?.cards.hand.map((card) => {
                         return <Card
                             onClick={() => onClickHandle(card)}
                             key={`hand-${card.instanceId}`}
                             image={card.image}
                             name={card.name}
-                            isSelected={game.players[0]?.cards?.selectedCard?.instanceId === card.instanceId}
+                            isSelected={gameStore.selectedCard?.instanceId === card.instanceId}
                             description={card.description}
                             ap={card.apCost}
                         />
                     })
                 }
             </div>
-            <div onClick={() => {setIsOpenModalDiscardCards(true)}} className={styles.deck}>Сброс</div>
+            <div onClick={() => {
+                setIsOpenModalDiscardCards(true)
+            }} className={styles.deck}>Сброс
+            </div>
         </div>
     );
 });

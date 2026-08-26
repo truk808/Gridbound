@@ -1,12 +1,18 @@
+import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+
 export interface IEffect {
-    id: string
-    type: EffectType
+    readonly id: string
+    readonly type: EffectType
     duration: number
     level: number
 
     setDuration(duration: number): void
     setLevel(level: number): void
+
+    toDTO(): IEffectDTO
 }
+
+export type IEffectDTO = DeepFieldsOnly<IEffect>
 
 export type EffectType =
     | 'damage'
@@ -15,6 +21,7 @@ export type EffectType =
     | 'heal'
     | 'move'
     | 'takeCard'
+    | 'teleport'
     | 'poison'
     | 'poison_hit'
     | 'stun'
@@ -23,7 +30,7 @@ export type EffectType =
     | 'rage'
     | 'immunity'
 
-export type StatusType = Exclude<EffectType, 'damage' | 'armor' | 'ap' | 'heal' | 'move' | 'takeCard'>;
+export type StatusType = Exclude<EffectType, 'damage' | 'armor' | 'ap' | 'heal' | 'move' | 'takeCard' | 'teleport'>;
 
 export interface IInstantEffect {
     damage?: number;
@@ -32,6 +39,7 @@ export interface IInstantEffect {
     heal?: number;
     move?: number;
     takeCard?: number;
+    teleport?: number;
 }
 
 export interface IStatusEffect {

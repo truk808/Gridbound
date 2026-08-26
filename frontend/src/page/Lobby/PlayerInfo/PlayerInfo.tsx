@@ -1,11 +1,52 @@
-import { observer } from "mobx-react-lite";
-import { useStore } from "../../../store/RootStore.ts";
-import { CHARACTER_CONFIG } from "../../../config/character.config.ts";
-import { Dropdown } from "../../../components/ui/dropdown/Dropdown.tsx";
-import { Character } from "../../../models/Character.ts";
+import {useEffect} from "react";
+import {observer} from "mobx-react-lite";
+import {useStore} from "../../../store/RootStore.ts";
+import {CHARACTER_CONFIG} from "../../../../../config/character.config.ts";
+import {Dropdown} from "../../../components/ui/dropdown/Dropdown.tsx";
+import {useNavigate, useParams} from "react-router-dom";
+import {ROUTES} from "../../../router/const.ts";
 
 export const PlayersInfo = observer(() => {
-    const { game } = useStore();
+    const {gameStore, socketStore} = useStore();
+    const {id: roomId} = useParams<{ id: string }>();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const unsubscribe = socketStore.onMessage((data) => {
+            switch (data.event) {
+                case 'player_joined':
+                case 'lobby_created':
+                case 'player_left':
+                case "character_selected":
+                    if (data.game) {
+                        gameStore.setGame(data.game);
+                    }
+                    break;
+                case 'game_started':
+                    if (data.game) {
+                        gameStore.setGame(data.game);
+                    }
+                    navigate(`${ROUTES.GAME}/${roomId}`)
+                    break
+            }
+        });
+
+        const player = gameStore.localPlayer;
+
+        if (roomId && player) {
+            socketStore.send({
+                method: 'join_lobby',
+                roomId: roomId,
+                playerName: player.nickname
+            });
+        } else {
+            console.log('Not sending join_lobby - roomId:', roomId, 'player:', player?.nickname);
+        }
+
+        return () => {
+            unsubscribe();
+        };
+    }, [roomId, gameStore.localPlayer?.id]);
 
     const characterList = Object.values(CHARACTER_CONFIG).map((char) => ({
         id: char.id,
@@ -13,21 +54,26 @@ export const PlayersInfo = observer(() => {
     }));
 
     const chooseCharacter = (characterId: number | null) => {
-        const localPlayer = game.localPlayer;
+        const localPlayer = gameStore.localPlayer;
         if (!localPlayer || characterId === null) return;
 
         const config = Object.values(CHARACTER_CONFIG).find((c) => c.id === characterId);
         if (config) {
-            const newCharacter = new Character(config.name, config.hp);
-            localPlayer.setCharacter(newCharacter);
+            socketStore.send({
+                method: 'select_character',
+                roomId: roomId,
+                playerId: localPlayer.id,
+                characterName: config.name
+            });
         }
     };
 
+    if (!gameStore.game) return
+
     return (
         <div>
-            {game.players.map((player) => {
-                const isLocal = player.id === game.localPlayer?.id;
-
+            {(gameStore.game.players ?? []).map((player) => {
+                const isLocal = player.id === gameStore.localPlayer?.id;
                 const selectedConfig = Object.values(CHARACTER_CONFIG).find(
                     (c) => c.name === player.character?.name
                 );
@@ -51,6 +97,7 @@ export const PlayersInfo = observer(() => {
                     </div>
                 );
             })}
+            <hr style={{padding: '10px 0 10px 0'}}/>
         </div>
     );
 });

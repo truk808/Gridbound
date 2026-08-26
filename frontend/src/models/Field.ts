@@ -1,7 +1,7 @@
-import type {IField} from "../types/IField.ts";
-import type {ICell} from "../types/ICell.ts";
+import type {IField} from "../../../types/IField.ts";
+import type {ICell} from "../../../types/ICell.ts";
 import {makeAutoObservable} from "mobx";
-import {COUNT_CELL} from "../config/gameConfig.ts";
+import {COUNT_CELL} from "../../../config/gameConfig.ts";
 import {Cell} from "./Cell.ts";
 
 export class Field implements IField {

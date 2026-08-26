@@ -1,10 +1,10 @@
 import {makeAutoObservable} from "mobx";
-import type {ICard, ICardAction, IConditionContext} from "../types/ICard.ts";
+import type {ICard, ICardAction, IConditionContext} from "../../../types/ICard.ts";
 import type {Player} from "./Player.ts";
 import type {Character} from "./Character.ts";
-import type {ICell} from "../types/ICell.ts";
-import type {IPlayer} from "../types/IPlayers.ts";
-import {createEffect} from "../utils/createEffect.ts";
+import type {ICell} from "../../../types/ICell.ts";
+import type {IPlayer} from "../../../types/IPlayers.ts";
+import {createEffect} from "../../../helper/createEffect.ts";
 
 export class Card implements ICard {
     readonly instanceId: string = crypto.randomUUID();

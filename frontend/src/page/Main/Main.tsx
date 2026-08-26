@@ -9,7 +9,11 @@ export const Main = () => {
 
     return (
         <div className={styles.main}>
-            <Action />
+            <h1 className={styles.name}>GRIDBOUND</h1>
+            <span> v0.1.0-alpha </span>
+            <div>
+                <Action />
+            </div>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import type {ICardAction} from "../types/ICard.ts";
-import {conditions} from "../utils/conditions.ts";
+import {conditions} from "../frontend/src/utils/conditions";
 
 export interface ICardData {
     readonly id: string;
@@ -138,13 +138,14 @@ export const CARDS_CONFIG = {
         description: 'переместите персонажа на 2 клетке ',
         apCost: 2,
         image: '',
-        radius: 0,
+        radius: 2,
         actions: [
             {
-                target: "object",
+                target: "subject",
                 effects: [{
                     instant: {move: 2}
-                }]
+                }],
+                condition: (context) => conditions.isTargetAtDistance(context, 2)
             },
         ],
     },
@@ -166,7 +167,7 @@ export const CARDS_CONFIG = {
             },
         ],
     },
-     NEED_TO_THINK_ABOUT_IT: {
+    NEED_TO_THINK_ABOUT_IT: {
         id: 'NEED_TO_THINK_ABOUT_IT',
         name: 'Нужно подумать',
         description: 'Сбросьте эту карту и получите 2',

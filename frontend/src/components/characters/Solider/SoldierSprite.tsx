@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SoldierSprite.module.css';
 import {CharacterInfoUi} from "../../GameUI/PlaterInfo/CharacterInfoUi/CharacterInfoUi.tsx";
-import type {ICharacter} from "../../../types/character/ICharacter.ts";
+import type {ICharacter} from "../../../../../types/character/ICharacter.ts";
 import {observer} from "mobx-react-lite";
 
 interface SoldierSpriteProps {

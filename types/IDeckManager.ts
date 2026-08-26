@@ -1,19 +1,20 @@
 import type {ICard} from "./ICard.ts";
+import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
 
 export interface IDeckManager {
     deck: ICard[];
     discardCards: ICard[];
     hand: ICard[];
-    selectedCard: ICard | null;
 
-    setSelectedCard(selectedCard: ICard | null): void
     shuffleDeck(): void
     getSortedDeck(): ICard[]
     setDeck(deck: ICard[]): void
-
     drawCards(): void;
     takeCard(): void
-
-    discardFromHand(cardInstanceId: string): ICard | null
+    getCardById(id: string | null): ICard | null
+    discardFromHand(cardInstanceId: string | null): void
     recycleDiscard(): void
+    toDTO(): IDeckManagerDTO
 }
+
+export type IDeckManagerDTO = DeepFieldsOnly<IDeckManager>

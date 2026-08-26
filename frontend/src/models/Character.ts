@@ -1,8 +1,8 @@
-import type {ICharacter} from "../types/character/ICharacter.ts";
-import type {ICell} from "../types/ICell.ts";
+import type {ICharacter} from "../../../types/character/ICharacter.ts";
+import type {ICell} from "../../../types/ICell.ts";
 import {makeAutoObservable} from "mobx";
-import type {IEffect, StatusType} from "../types/IEffect.ts";
-import {createEffect} from "../utils/createEffect.ts";
+import type {IEffect, StatusType} from "../../../types/IEffect.ts";
+import {createEffect} from "../../../helper/createEffect.ts";
 import {events} from "./EventBus.ts";
 
 export class Character implements ICharacter {
@@ -133,10 +133,6 @@ export class Character implements ICharacter {
         }
     }
 
-    addArmor(armor: number): void {
-        this._armor += armor;
-    }
-
     addEffect(effect: IEffect): void {
         const effectCharacter: IEffect | undefined = this._status.find(e => e.type === effect.type);
         if (effectCharacter) {
@@ -145,6 +141,10 @@ export class Character implements ICharacter {
         } else {
             this._status.push(effect);
         }
+    }
+
+    addArmor(armor: number): void {
+        this._armor += armor;
     }
 
     tickEffects(): void {

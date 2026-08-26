@@ -1,18 +1,27 @@
 import {CharacterInfoUi} from "./CharacterInfoUi/CharacterInfoUi.tsx";
 import {observer} from "mobx-react-lite";
 import styles from './PlayerInfo.module.css'
+import type {IPlayerDTO} from "../../../../../types/IPlayer.ts";
 import {useStore} from "../../../store/RootStore.ts";
-import type {IPlayer} from "../../../types/IPlayers.ts";
 
 interface PlayerInfoProps {
-    player: IPlayer;
+    player: IPlayerDTO;
     isActivePlayer?: boolean;
+    isLocalPlayer?: boolean;
 }
 
-export const PlayerInfo = observer(({player, isActivePlayer}: PlayerInfoProps) => {
+export const PlayerInfo = observer(({player, isActivePlayer, isLocalPlayer}: PlayerInfoProps) => {
+    const {gameStore, socketStore} = useStore()
     const character = player?.character;
-    const {game} = useStore()
     if (!character) return <p>Грузим персонажа</p>;
+
+    function nextTurn() {
+        socketStore.send({
+            method: 'next_turn',
+            playerId: gameStore.localPlayer?.id ?? '',
+            roomId: gameStore.game?.id ?? ''
+        })
+    }
 
     return (
         <div className={styles.playerInfo}>
@@ -20,8 +29,8 @@ export const PlayerInfo = observer(({player, isActivePlayer}: PlayerInfoProps) =
                 <span>{player.nickname}</span>
                 <span>{player.ap}</span>
                 {
-                    isActivePlayer &&
-                    <button onClick={() => game.endTurn()}>далее</button>
+                    isActivePlayer && isLocalPlayer &&
+                    <button onClick={() => {nextTurn()}}>далее</button>
                 }
             </div>
             <CharacterInfoUi

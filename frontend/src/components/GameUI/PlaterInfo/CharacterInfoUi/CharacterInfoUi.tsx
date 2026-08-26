@@ -2,11 +2,11 @@ import styles from "./CharacterInfoUi.module.css";
 import {Bar} from "../../../ui/Bar/Bar.tsx";
 import {StatusList} from "../../../ui/StatusList/StatusList.tsx";
 import {observer} from "mobx-react-lite";
-import type {ICharacter} from "../../../../types/character/ICharacter.ts";
+import type {ICharacterDTO} from "../../../../../../types/character/ICharacter.ts";
 
 
 interface CharacterInfoUiProps {
-    character: ICharacter;
+    character: ICharacterDTO;
 }
 
 export const CharacterInfoUi = observer(({character}: CharacterInfoUiProps) => {

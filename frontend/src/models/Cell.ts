@@ -1,4 +1,4 @@
-import type {ICell} from "../types/ICell.ts";
+import type {ICell} from "../../../types/ICell.ts";
 import {makeAutoObservable} from "mobx";
 
 export class Cell implements ICell {

@@ -1,4 +1,4 @@
-import type {EffectType, IEffect} from "../types/IEffect.ts";
+import type {EffectType, IEffect} from "../../../types/IEffect.ts";
 import {makeAutoObservable} from "mobx";
 
 export class Effect implements IEffect {

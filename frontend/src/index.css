@@ -1,13 +1,17 @@
-body {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+
+}
+
 :root {
-    --text-color-white: #d5d5d5;
-    --base-color: rgb(22 27 34);
-    --base-color-opacity-70: rgb(22 27 34 / 0.7);
-    --base-color-opacity-50: rgb(22 27 34 / 0.5);
-    --base-color-opacity-25: rgb(22 27 34 / 0.25);
+    --text-color-white: #e2e8f0;
+    --base-color: rgba(30, 34, 45, 0.75);
+    --primery-base-color: rgba(40, 46, 60, 0.85);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --primery-border-color: rgba(255, 255, 255, 0.2);;
 }

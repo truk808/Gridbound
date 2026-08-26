@@ -1,17 +1,20 @@
 import styles from './Cell.module.css';
 import {observer} from "mobx-react-lite";
-import type {ICell} from "../../../types/ICell.ts";
+import type {ICell, ICellDTO} from "../../../../../types/ICell.ts";
 import {SoldierSprite} from "../../../components/characters/Solider/SoldierSprite.tsx";
-import type {ICharacter} from "../../../types/character/ICharacter.ts";
+import type {ICharacter, ICharacterDTO} from "../../../../../types/character/ICharacter.ts";
+import {useEffect} from "react";
 
 interface CellProps {
-    character: ICharacter | null;
-    cell: ICell;
+    character: ICharacterDTO | null;
+    cell: ICellDTO;
     onClick: () => void;
     selectColorHighlight: "red" | "yellow" | null
 }
 
 const Cell = observer(({character, onClick, selectColorHighlight}: CellProps) => {
+
+
     return (
         <div onClick={onClick}
              className={`${styles.cell} ${character && styles.hasCharacter} ${selectColorHighlight && styles[selectColorHighlight]}`}>

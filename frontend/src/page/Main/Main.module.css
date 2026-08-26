@@ -1,10 +1,37 @@
 .main {
+    overflow: hidden;
+    position: relative;
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+    background-color: #1a1a1d;
+}
 
+.main::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: url("/assets/backgroundMainPage.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: blur(4px);
+    z-index: 0;
+}
 
-    background-color: #2d4c34;
+.main > * {
+    position: relative;
+    z-index: 1;
+}
+
+.name {
+    color: var(--text-color-white);
 }

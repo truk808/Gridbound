@@ -16,10 +16,10 @@ export const routes: IRoute[] = [
     },
     {
         element: <Game/>,
-        path: ROUTES.GAME
+        path: `${ROUTES.GAME}/:id`
     },
     {
         element: <Lobby/>,
-        path: ROUTES.LOBBY
+        path: `${ROUTES.LOBBY}/:id`
     }
 ]
