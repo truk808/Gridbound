@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import Modal from "../../../ui/modal/Modal.tsx";
 
 export const CardPanel = observer(() => {
-    const {gameStore} = useStore()
+    const {gameStore, socketStore} = useStore()
     const [isOpenModalDeck, setIsOpenModalDeck] = useState<boolean>(false)
     const [isOpenModalDiscardCards, setIsOpenModalDiscardCards] = useState<boolean>(false)
 
@@ -29,6 +29,16 @@ export const CardPanel = observer(() => {
         // }
     }
 
+    const removeCard = (id: string) => {
+        console.log(id)
+        socketStore.send({
+            method: 'discard_card',
+            cardId: id,
+            roomId: gameStore.game?.id ?? '',
+            playerId: gameStore.localPlayer?.id ?? '',
+        })
+    }
+
     return (
         <div className={styles.cardPanel}>
             <Modal
@@ -37,9 +47,14 @@ export const CardPanel = observer(() => {
             >
                 <div className={styles.a}>
                     {
-                        gameStore.localPlayer?.cards.deck.map((card) => {
+                        gameStore.localPlayer?.cards.deck
+                            .slice()
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((card) => {
                             return <Card
-                                key={card.id}
+                                id={card.instanceId}
+                                onClose={(id) => (id)}
+                                key={card.instanceId}
                                 onClick={() => {
                                 }}
                                 isSelected={false}
@@ -60,6 +75,8 @@ export const CardPanel = observer(() => {
                     {
                         gameStore.localPlayer?.cards.discardCards.map((card) => {
                             return <Card
+                                id={card.id}
+                                onClose={(id: string) => (id)}
                                 key={card.id}
                                 onClick={() => {
                                 }}
@@ -79,6 +96,8 @@ export const CardPanel = observer(() => {
                 {
                     gameStore.localPlayer?.cards.hand.map((card) => {
                         return <Card
+                            id={card.instanceId}
+                            onClose={(id: string) => removeCard(id)}
                             onClick={() => onClickHandle(card)}
                             key={`hand-${card.instanceId}`}
                             image={card.image}

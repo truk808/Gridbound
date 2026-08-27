@@ -33,15 +33,12 @@ export const startGame = (msg: ExtractClientMessage<'start_game'>, ws: CustomWeb
         return;
     }
 
-    console.log('----------PlAYER Start--------------------')
-
     for (const player of game.players) {
-        console.log(1, player.nickname)
         if(player.character && player.character.name) {
-            console.log(2, player.character.name)
                 const baseDeck = CHARACTER_DECK[player.character.name] || [];
                 const clonedDeck = baseDeck.map((c) => createCard((c.id) as any));
                 player.cards.setDeck(clonedDeck);
+                player.cards.shuffleDeck()
                 player.setAP(3)
                 player.cards.drawCards();
             }

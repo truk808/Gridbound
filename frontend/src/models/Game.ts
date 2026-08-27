@@ -68,6 +68,7 @@ export class Game {
         return this.game?.players.find((player) => player.id === id) ?? null;
     }
 
+    // !!!
     canMoveToCell(targetCell: ICellDTO): boolean {
         if (!this.localPlayer || !this.localPlayer.character || !this.isCanTurn) return false;
 
@@ -82,13 +83,14 @@ export class Game {
         return distance === 1 && !isOccupied && hasEnoughAP;
     }
 
+    // !!!
     canPlayCardToCell(card: ICardDTO, targetCell: ICellDTO): boolean {
-        if (!this.selectedCard || !this.localPlayer || !this.isCanTurn || !this.localPlayer.character || !this.localPlayer.character.cell) return false;
-
-        if (this.localPlayer.ap < this.selectedCard.apCost) return false;
-
-        console.log(card.radius < Math.abs(targetCell?.x - this.localPlayer.character.cell?.x))
-        if (card.radius < Math.abs(targetCell?.x - this.localPlayer.character.cell?.x)) return false;
+        // if (!this.selectedCard || !this.localPlayer || !this.isCanTurn || !this.localPlayer.character || !this.localPlayer.character.cell) return false;
+        //
+        // if (this.localPlayer.ap < this.selectedCard.apCost) return false;
+        //
+        // console.log(card.radius < Math.abs(targetCell?.x - this.localPlayer.character.cell?.x))
+        // if (card.radius < Math.abs(targetCell?.x - this.localPlayer.character.cell?.x)) return false;
 
         // const targetChar = this.getCharacterByCell(targetCell.x);
 
@@ -97,10 +99,10 @@ export class Game {
 
         // return distance <= this.selectedCard.radius && !!targetChar;
 
-        return true;
+        return false;
     }
 
     getCharacterByPlayer(playerId: string): ICharacterDTO | null {
-        return this.game?.players.find((player) => player.id === playerId).character;
+        return this._game?.players.find((player) => player.id === playerId)?.character ?? null;
     }
 }

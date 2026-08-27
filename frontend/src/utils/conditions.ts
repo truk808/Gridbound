@@ -15,5 +15,10 @@ export const conditions = {
         console.log('distance', distance);
         console.log('------------------------')
         return Math.abs(targetCell.x - caster.cell.x) === distance;
+    },
+
+    IsTargetEnemy({ caster, targetCharacter }: IConditionContext): boolean {
+        const isCaster = caster.id !== targetCharacter?.id
+        return isCaster && targetCharacter !== null
     }
 };

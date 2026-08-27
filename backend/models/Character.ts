@@ -8,6 +8,7 @@ import {events} from "../../frontend/src/models/EventBus";
 export class Character implements ICharacter {
     readonly id: string;
     readonly name: CharacterName;
+    private _armorTime: number = 2;
     private _distanceToMove: number;
     private _maxHp: number;
     private _hp: number;
@@ -33,8 +34,20 @@ export class Character implements ICharacter {
         this._cell = cell ?? null;
     }
 
+    get armorTime(): number { return this._armor; }
+
     addArmor(armor: number): void {
         this._armor += armor;
+    }
+
+    setArmorTime(value: number) {
+        if (this._armor === 0) return;
+        if (this._armorTime - value <= 0) {
+            this._armorTime = 2;
+            this._armor = 0;
+            return;
+        }
+        this._armorTime -= value;
     }
 
     applyAttackerPassiveEffect(attacker: ICharacter, damage: number) {
@@ -77,9 +90,15 @@ export class Character implements ICharacter {
         if (target && this.cell) {
             if (target.isOwn) return false;
             if (Math.abs(target.x - this.cell.x) !== this.distanceToMove) return false;
-            return true;
         }
-        return false;
+
+        console.log('check stun', this.hasStatus('stun'));
+        if (this.hasStatus('stun')) {
+            console.log('stun', target);
+            return false;
+        }
+
+        return true ;
     }
 
     move(target: ICell | null): void {
@@ -150,6 +169,7 @@ export class Character implements ICharacter {
         return {
             id: this.id,
             name: this.name,
+            armorTime: this.armorTime,
             maxHp: this._maxHp,
             hp: this._hp,
             armor: this._armor,

@@ -54,11 +54,21 @@ export class Decks implements IDeckManager{
     recycleDiscard(): void {
     }
 
+    discardCard(cardId: string | null ): void {
+        if (!cardId) return;
+
+        const cardIndex = this._hand.findIndex((card) => card.instanceId === cardId);
+        if (cardIndex === -1) return ;
+        const [discardedCard] = this._hand.splice(cardIndex, 1);
+        this._discardCards.push(discardedCard);
+    }
+
     setDeck(deck: ICard[]): void {
         this._deck = deck;
     }
 
     shuffleDeck(): void {
+        this._deck.sort(() =>  Math.random() - 0.5);
     }
 
     takeCard(): void {

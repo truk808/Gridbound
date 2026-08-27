@@ -41,7 +41,9 @@ export const moveCharacter = (msg: ExtractClientMessage<'move_character'>, ws: C
     const targetCell = game.field.getCellByX(msg.targetCell.x)
 
     if(player.character.isCanMove(targetCell)) {
+        if (player.ap - 1 < 0) return
         player.character.move(targetCell);
+        player.setAP(player.ap - 1);
     } else {
         ws.send(JSON.stringify({
             event: 'error',

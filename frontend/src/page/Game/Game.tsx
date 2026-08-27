@@ -7,13 +7,11 @@ import type {ICellDTO} from "../../../../types/ICell.ts";
 import {GameUi} from "../../components/GameUI/GameUI.tsx";
 import {useParams} from "react-router-dom";
 
-
 export const Game = observer(() => {
             const {gameStore, socketStore} = useStore();
             const roomId = useParams();
 
             if (!roomId.id) return
-
 
             useEffect(() => {
                 const unsubscribe = socketStore.onMessage((data) => {
@@ -21,10 +19,12 @@ export const Game = observer(() => {
                         case "card_played":
                         case 'character_moved':
                         case 'turn_end':
+                        case 'card_discarded':
                             console.log("Поле меняется")
                             gameStore.setSelectedCell(null)
                             gameStore.setSelectedCard(null)
                             gameStore.setGame(data.game)
+                            break
                     }
                 });
                 unsubscribe()
@@ -80,25 +80,35 @@ export const Game = observer(() => {
                 }
             }
 
-        const getColorHighlight = (cell: ICellDTO): 'red' | 'yellow' | null => {
-            if (gameStore.selectedCell?.x === cell.x) {
-                return 'red';
-            }
+            // const canPlayCardToCell = (card: ICardDTO, targetCell: ICellDTO): boolean => {
+            //     socketStore.send({
+            //         method: "canPlayCard",
+            //         roomId: roomId.id ?? '',
+            //         playerId: localPlayer.id,
+            //         character: card,
+            //         targetCell: targetCell,
+            //     })
+            // }
 
-            if (gameStore.selectedCard) {
-                if (gameStore.canPlayCardToCell(gameStore.selectedCard, cell)) {
-                    return 'yellow';
+            const getColorHighlight = (cell: ICellDTO): 'red' | 'yellow' | null => {
+                if (gameStore.selectedCell?.x === cell.x) {
+                    return 'red';
                 }
-            }
 
-            if (gameStore.selectedCell && !gameStore.selectedCard) {
-                if (gameStore.canMoveToCell(cell)) {
-                    return 'yellow';
+                if (gameStore.selectedCard) {
+                    if (gameStore.canPlayCardToCell(gameStore.selectedCard, cell)) {
+                        return 'yellow';
+                    }
                 }
-            }
 
-            return null;
-        };
+                if (gameStore.selectedCell && !gameStore.selectedCard) {
+                    if (gameStore.canMoveToCell(cell)) {
+                        return 'yellow';
+                    }
+                }
+
+                return null;
+            };
 
             useEffect(() => {
                 console.log('isHost', gameStore.isHost)
@@ -121,8 +131,8 @@ export const Game = observer(() => {
                                         cell={cell}
                                         onClick={() => onClickHandle(cell)}
                                         character={{
-                                         char: gameStore.getCharacterByCell(cell.x),
-                                         flip: !gameStore.isHost && gameStore.game.,
+                                            char: gameStore.getCharacterByCell(cell.x),
+                                            flip: !gameStore.isHost,
                                         }}
                                         selectColorHighlight={getColorHighlight(cell)}
                                     />

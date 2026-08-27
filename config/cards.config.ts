@@ -22,7 +22,8 @@ export const CARDS_CONFIG = {
         actions: [
             {
                 target: "object",
-                effects: [{instant: {damage: 8}}]
+                effects: [{instant: {damage: 8}}],
+                condition: conditions.IsTargetEnemy
             },
         ],
     },
@@ -106,7 +107,8 @@ export const CARDS_CONFIG = {
                 target: "object",
                 effects: [{
                     instant: {damage: 4}
-                }]
+                }],
+                condition: conditions.IsTargetEnemy
             },
             {
                 target: "subject",
@@ -128,14 +130,14 @@ export const CARDS_CONFIG = {
                 target: "object",
                 effects: [{
                     instant: {armor: 10}
-                }]
+                }],
             },
         ],
     },
     DASH: {
         id: 'DASH',
         name: 'Рывок',
-        description: 'переместите персонажа на 2 клетке ',
+        description: 'переместите персонажа на 2 клетки',
         apCost: 2,
         image: '',
         radius: 2,
@@ -143,7 +145,7 @@ export const CARDS_CONFIG = {
             {
                 target: "subject",
                 effects: [{
-                    instant: {move: 2}
+                    instant: {teleport: 1}
                 }],
                 condition: (context) => conditions.isTargetAtDistance(context, 2)
             },
@@ -163,7 +165,8 @@ export const CARDS_CONFIG = {
                     {instant: {damage: 1}},
                     {instant: {damage: 1}},
                     {instant: {damage: 1}},
-                ]
+                ],
+                condition: conditions.IsTargetEnemy
             },
         ],
     },
@@ -196,8 +199,8 @@ export const CARDS_CONFIG = {
                 target: "object",
                 effects: [
                     {status: {status: "rage", level: 2, duration: 1}}
-                ]
-            },
+                ],
+                },
         ],
     },
     PAIN: {
@@ -228,7 +231,8 @@ export const CARDS_CONFIG = {
                 target: "object",
                 effects: [
                     {instant: {damage: 20}},
-                ]
+                ],
+                condition: conditions.IsTargetEnemy
             },
         ],
     },
@@ -245,7 +249,8 @@ export const CARDS_CONFIG = {
                 effects: [
                     {instant: {damage: 4}},
                     {instant: {move: 1}},
-                ]
+                ],
+                condition: conditions.IsTargetEnemy
             },
         ],
     },

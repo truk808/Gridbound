@@ -7,6 +7,7 @@ import {selectCharacter} from "./commands/selectCharacter";
 import {moveCharacter} from "./commands/moveCharacter";
 import {playCard} from "./commands/playCard";
 import {nextTurn} from "./commands/nextTurn";
+import {discardCard} from "./commands/discardCard";
 
 export const messageHandler = (msg: ClientMessage, ws: CustomWebSocket) => {
     if (msg.method === 'create_lobby') {
@@ -42,6 +43,10 @@ export const messageHandler = (msg: ClientMessage, ws: CustomWebSocket) => {
     if (msg.method === 'next_turn') {
         nextTurn(msg, ws)
         return;
+    }
+
+    if (msg.method === 'discard_card') {
+        discardCard(msg, ws)
     }
 
 };

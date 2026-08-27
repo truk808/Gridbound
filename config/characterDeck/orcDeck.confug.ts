@@ -19,14 +19,13 @@ export const ORC_DECK_CONFIG: ICard[] = [
     // createCard('ENERGY'),
     // createCard('ENERGY'),
 
-    createCard('ORC_RAGE'),
-    createCard('ORC_RAGE'),
-    createCard('PAIN'),
-    createCard('HEAVY_HIT'),
+    // createCard('ORC_RAGE'),
+    // createCard('ORC_RAGE'),
+    // createCard('PAIN'),
+    // createCard('HEAVY_HIT'),
     createCard('KICK'),
     createCard('KICK'),
-    createCard('DEAD_END'),
-    createCard('DEAD_END'),
-    createCard('MUSCLE_FLEXING'),
-
+    // createCard('DEAD_END'),
+    // createCard('DEAD_END'),
+    // createCard('MUSCLE_FLEXING'),
 ]

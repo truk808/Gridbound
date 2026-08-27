@@ -6,6 +6,7 @@ import type {CharacterName} from "../../config/characters.config";
 export interface ICharacter {
     readonly id: string;
     readonly name: CharacterName;
+    armorTime: number;
     distanceToMove: number;
     maxHp: number;
     hp: number;
@@ -13,6 +14,7 @@ export interface ICharacter {
     status: IEffect[];
     cell: ICell | null;
 
+    setArmorTime(value: number): void;
     setCell(cell: ICell | null): void
     isCanMove(target: ICell | null): boolean;
     move(target: ICell | null): void

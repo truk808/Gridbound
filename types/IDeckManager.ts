@@ -10,6 +10,7 @@ export interface IDeckManager {
     getSortedDeck(): ICard[]
     setDeck(deck: ICard[]): void
     drawCards(): void;
+    discardCard(cardId: string | null ): void
     takeCard(): void
     getCardById(id: string | null): ICard | null
     discardFromHand(cardInstanceId: string | null): void

@@ -5,7 +5,8 @@ import {IField} from "../../types/IField";
 import {ICell} from "../../types/ICell";
 import {ICharacter} from "../../types/character/ICharacter";
 import {Card} from "../../frontend/src/models/Card";
-import {ICard} from "../../types/ICard";
+import {ICard, IConditionContext} from "../../types/ICard";
+import {platform} from "node:os";
 
 export class Game implements IGame {
     readonly id: string
@@ -105,7 +106,10 @@ export class Game implements IGame {
         for (const player of this._players) {
             if(player.character) {
                 player.character.tickEffects()
+                player.cards.drawCards()
+                player.character.setArmorTime(1)
             }
+            player.setAP(3)
         }
 
         this._turn += 1
@@ -157,16 +161,37 @@ export class Game implements IGame {
     }
 
     isCanPlayCard(caster: IPlayer, card: ICard | null, targetCell: ICell | null): boolean {
-        if (!card || !targetCell) return false;
+        if (!card || !targetCell || !caster.character) return false;
+        const context: IConditionContext = {
+            caster: caster.character,
+            targetCharacter: this.getCharacterByCell(targetCell),
+            targetCell: targetCell,
+            boardWidth: 5,
+        }
+
+        if (caster.character.status.find((stat) => stat.type === 'stun')) {
+            return false;
+        }
+
+        for (const action of card.actions) {
+            if (action.condition && !action.condition(context)) {
+                console.log(`Не выполняется условие ${action.condition}`);
+                return false;
+            }
+        }
+
+
         // if (!this.getCharacterByCell(targetCell)) return false;
-        console.log('card.radius', card.radius)
+        if (caster.ap - card.apCost < 0) return false;
         if (caster.character?.cell && Math.abs(targetCell.x - caster.character?.cell.x) > card.radius) return false;
         return true;
     }
 
     playCard(caster: IPlayer, card: ICard | null, targetCell: ICell | null): void {
-        card?.applyEffects(caster, this.getCharacterByCell(targetCell), this.field, targetCell);
+        if (!card) return;
+        card.applyEffects(caster, this.getCharacterByCell(targetCell), this.field, targetCell);
         caster.cards.discardFromHand(card?.instanceId ?? null)
+        caster.setAP(caster.ap - card.apCost)
     }
 
     removePlayer(playerId: string): void {
