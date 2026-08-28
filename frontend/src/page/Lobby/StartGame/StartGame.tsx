@@ -1,20 +1,18 @@
-import {useStore} from "../../../store/RootStore.ts";
-import {useNavigate} from "react-router-dom";
-import {ROUTES} from "../../../router/const.ts";
-import {useEffect} from "react";
+import styles from './StartGame.module.css';
+import { useStore } from "../../../store/RootStore.ts";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../router/const.ts";
+import { useEffect } from "react";
+import { observer } from "mobx-react-lite";
 
-export const StartGame = () => {
-    const { gameStore, socketStore } = useStore()
-    const navigate = useNavigate()
+export const StartGame = observer(() => {
+    const { gameStore, socketStore } = useStore();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = socketStore.onMessage((data) => {
-            if (data.event === 'game_started') {
-                if (data.bool) {
-                    console.log('ИГРА НАЧИНАЕТСЯ')
-                    // gameStore.setGame(data.);
-                    navigate(ROUTES.GAME)
-                }
+            if (data.event === 'game_started' && data.bool) {
+                navigate(ROUTES.GAME);
             }
         });
 
@@ -23,7 +21,7 @@ export const StartGame = () => {
         };
     }, [navigate, gameStore, socketStore]);
 
-    const ocClickHandle = () => {
+    const onClickHandle = () => {
         if (!gameStore.game?.id) return;
 
         socketStore.send({
@@ -31,18 +29,13 @@ export const StartGame = () => {
             roomId: gameStore.game?.id,
             playerId: gameStore.localPlayerId
         });
-    }
+    };
+
+    if (!gameStore.isHost) return null;
 
     return (
-        <>
-            {
-                gameStore.isHost &&
-                <button disabled={false} onClick={() => {ocClickHandle()}}>
-                    начать
-                </button>
-            }
-        </>
-
+        <button className={styles.startButton} onClick={onClickHandle}>
+            Начать
+        </button>
     );
-};
-
+});

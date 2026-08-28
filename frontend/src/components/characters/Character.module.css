@@ -1,0 +1,36 @@
+.sprite {
+    width: 32px;
+    height: 32px;
+    transform: scale(3);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+    animation: idleAnimation 0.8s steps(6) infinite;
+}
+
+@keyframes idleAnimation {
+    from {
+        background-position-x: -34px;
+        background-position-y: -34px;
+
+    }
+    to {
+        background-position-x: -634px;
+        background-position-y: -34px;
+    }
+}
+
+.flipped {
+    transform: scale(3) scaleX(-1);
+}
+
+.soldier {
+    background-image: url('./assets/Soldier_Idle.png');
+}
+
+.orc {
+    background-image: url('./assets/Orc_Idle.png');
+}

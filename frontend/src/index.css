@@ -10,7 +10,7 @@ body {
 
 :root {
     --text-color-white: #e2e8f0;
-    --base-color: rgba(30, 34, 45, 0.75);
+    --base-color: rgb(30 34 45);
     --primery-base-color: rgba(40, 46, 60, 0.85);
     --border-color: rgba(255, 255, 255, 0.08);
     --primery-border-color: rgba(255, 255, 255, 0.2);;

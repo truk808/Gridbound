@@ -1,9 +1,7 @@
 import styles from './Cell.module.css';
 import {observer} from "mobx-react-lite";
-import type {ICell, ICellDTO} from "../../../../../types/ICell.ts";
-import {SoldierSprite} from "../../../components/characters/Solider/SoldierSprite.tsx";
-import type {ICharacter, ICharacterDTO} from "../../../../../types/character/ICharacter.ts";
-import {useEffect} from "react";
+import type {ICellDTO} from "../../../../../types/ICell.ts";
+import type {ICharacterDTO} from "../../../../../types/character/ICharacter.ts";
 import {Character} from "../../../components/characters/Character.tsx";
 
 interface CellProps {
@@ -17,13 +15,12 @@ interface CellProps {
 }
 
 const Cell = observer(({character, onClick, selectColorHighlight}: CellProps) => {
-
-
     return (
         <div onClick={onClick}
              className={`${styles.cell} ${character && styles.hasCharacter} ${selectColorHighlight && styles[selectColorHighlight]}`}>
             {character && (
                 <Character
+                    key={character.char?.id}
                     state={'idle'}
                     character={character.char}
                     flip={character.flip}

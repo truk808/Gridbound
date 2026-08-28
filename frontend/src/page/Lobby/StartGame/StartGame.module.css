@@ -1,0 +1,33 @@
+.startButton {
+    background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%);
+    border: 1px solid #b91c1c;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 48px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(185, 28, 28, 0.4);
+    transition: all 0.2s ease;
+}
+
+.startButton:hover {
+    background: linear-gradient(180deg, #991b1b 0%, #7f1d1d 100%);
+    box-shadow: 0 6px 24px rgba(185, 28, 28, 0.6);
+    transform: translateY(-1px);
+}
+
+.startButton:active {
+    transform: translateY(1px);
+}
+
+.startButton:disabled {
+    background: #1e293b;
+    border-color: #334155;
+    color: #64748b;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
