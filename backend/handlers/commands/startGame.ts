@@ -2,7 +2,7 @@ import {ExtractClientMessage} from "../../../types/socet.type";
 import {broadcastToRoom, CustomWebSocket} from "../../index";
 import {lobbies} from "../../state";
 import {CHARACTER_DECK} from "../../../config/characterDeck/characterDeck";
-import {createCard} from "../../../helper/createCard";
+import {createCard} from "../../helper/createCard";
 import {IPlayer} from "../../../types/IPlayer";
 import {nextTurn} from "./nextTurn";
 

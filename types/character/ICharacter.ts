@@ -1,7 +1,6 @@
 import type {ICell} from "../ICell.ts";
 import type {IEffect, StatusType} from "../IEffect.ts";
-import type {DeepFieldsOnly} from "../../helper/DeepFieldsOnly";
-import type {CharacterName} from "../../config/characters.config";
+import type {DeepFieldsOnly} from "../../backend/helper/DeepFieldsOnly";
 
 export interface ICharacter {
     readonly id: string;
@@ -16,18 +15,22 @@ export interface ICharacter {
 
     setArmorTime(value: number): void;
     setCell(cell: ICell | null): void
+    setArmor(armor: number): void
+    hasStatus(type: StatusType): boolean
     isCanMove(target: ICell | null): boolean;
     move(target: ICell | null): void
     addEffect(effect: IEffect): void
     removeEffect(effect: IEffect): void
     tickEffects(): void
-    takeDamage(damage: number, attacker: ICharacter): void
     addArmor(armor: number): void
+    takeDamage(damage: number, attacker: ICharacter): void
     applyAttackerPassiveEffect(attacker: ICharacter, damage: number): void
-    hasStatus(type: StatusType): boolean
-    setArmor(armor: number): void
     die(): void
     toDTO(): ICharacterDTO
 }
+
+export type CharacterName =
+    'soldier'
+    | 'orc'
 
 export type ICharacterDTO = DeepFieldsOnly<ICharacter>

@@ -1,5 +1,5 @@
 import type {ICard} from "./ICard.ts";
-import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+import type {DeepFieldsOnly} from "../backend/helper/DeepFieldsOnly";
 
 export interface IDeckManager {
     deck: ICard[];

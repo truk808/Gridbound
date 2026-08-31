@@ -2,11 +2,11 @@ import styles from './PlayerInfo.module.css';
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../store/RootStore.ts";
-import { CHARACTER_CONFIG } from "../../../../../config/character.config.ts";
 import { Dropdown } from "../../../components/ui/dropdown/Dropdown.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { ROUTES } from "../../../router/const.ts";
-import {Character} from "../../../components/characters/Character.tsx";
+import {Character} from "../../../components/Сharacter/Character.tsx";
+import {CHARACTER_CONFIG} from "../../../../../config/characters.config.ts";
 
 export const PlayersInfo = observer(() => {
     const { gameStore, socketStore } = useStore();
@@ -61,7 +61,7 @@ export const PlayersInfo = observer(() => {
         if (config) {
             socketStore.send({
                 method: 'select_character',
-                roomId: roomId,
+                roomId: roomId ?? '',
                 playerId: localPlayer.id,
                 characterName: config.name
             });

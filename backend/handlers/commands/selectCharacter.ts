@@ -2,6 +2,7 @@ import {ExtractClientMessage} from "../../../types/socet.type";
 import {broadcastToRoom, CustomWebSocket} from "../../index";
 import {lobbies} from "../../state";
 import {Character} from "../../models/Character";
+import {createCharacter} from "../../helper/createCharacter";
 
 export const selectCharacter = (msg: ExtractClientMessage<'select_character'>, ws: CustomWebSocket ) => {
     const game = lobbies.get(msg.roomId);
@@ -23,8 +24,7 @@ export const selectCharacter = (msg: ExtractClientMessage<'select_character'>, w
         return;
     }
 
-    // !!!
-    const character = new Character(msg.characterName, 1)
+    const character = createCharacter(msg.characterName);
     if (msg.playerId === game.hostId) {
         character.setCell(game.field.getCellByX(0))
     } else {

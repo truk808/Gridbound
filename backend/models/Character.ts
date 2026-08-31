@@ -2,7 +2,7 @@ import {ICharacter, ICharacterDTO} from "../../types/character/ICharacter";
 import {ICell, ICellDTO} from "../../types/ICell";
 import {IEffect, StatusType} from "../../types/IEffect";
 import {CharacterName} from "../../config/characters.config";
-import {createEffect} from "../../helper/createEffect";
+import {createEffect} from "../helper/createEffect";
 import {events} from "./EventBus";
 
 export class Character implements ICharacter {

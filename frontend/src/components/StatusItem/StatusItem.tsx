@@ -1,7 +1,7 @@
 import styles from "./StatusItem.module.css";
 import { observer } from "mobx-react-lite";
-import type {EffectType, StatusType} from "../../../../../types/IEffect.ts";
-import {EFFECTS_CONFIG} from "../../../../../config/effects.config.ts";
+import type {EffectType, StatusType} from "../../../../types/IEffect.ts";
+import {EFFECTS_CONFIG} from "../../../../config/effects.config.ts";
 
 interface StatusItemProps {
     type: EffectType;

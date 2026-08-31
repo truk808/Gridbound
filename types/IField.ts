@@ -1,5 +1,5 @@
 import type {ICell} from "./ICell.ts";
-import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+import type {DeepFieldsOnly} from "../backend/helper/DeepFieldsOnly";
 
 export interface IField {
     readonly cells: ICell[];

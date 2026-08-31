@@ -1,6 +1,6 @@
 import type {IGameDTO} from "./IGame";
 import type {IPlayerDTO} from "./IPlayer";
-import type {ICharacterDTO} from "./character/ICharacter";
+import type {CharacterName, ICharacterDTO} from "./character/ICharacter";
 import type {ICellDTO} from "./ICell";
 import type {ICardDTO} from "./ICard";
 
@@ -21,7 +21,7 @@ export type ServerMessage =
 export type ClientMessage =
     | { method: 'create_lobby'; roomId: string, playerName: string}
     | { method: 'join_lobby'; roomId: string, playerName: string }
-    | { method: 'select_character'; roomId: string, playerId: string, characterName: string }
+    | { method: 'select_character'; roomId: string, playerId: string, characterName: CharacterName }
     | { method: 'start_game'; roomId: string, playerId: string, turnDuration: number}
     | { method: 'move_character'; roomId: string, playerId: string, character: ICharacterDTO | null, targetCell: ICellDTO | null }
     | { method: 'play_card'; roomId: string, playerId: string, card: ICardDTO | null, targetCell: ICellDTO | null, selectedCell?: ICellDTO | null }

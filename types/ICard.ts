@@ -2,7 +2,7 @@ import type {ICell} from "./ICell.ts";
 import type {ICharacter} from "./character/ICharacter.ts";
 import type {IInstantEffect, IStatusEffect} from "./IEffect.ts";
 import type {IPlayer} from "./IPlayer";
-import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+import type {DeepFieldsOnly} from "../backend/helper/DeepFieldsOnly";
 import type {IField} from "./IField";
 
 export interface ICardTypeEffect {

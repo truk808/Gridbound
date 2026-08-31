@@ -1,5 +1,5 @@
 import type {ICardAction} from "../types/ICard.ts";
-import {conditions} from "../frontend/src/utils/conditions";
+import {conditions} from "../backend/utils/conditions";
 
 export interface ICardData {
     readonly id: string;

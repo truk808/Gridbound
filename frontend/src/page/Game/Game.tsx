@@ -4,9 +4,9 @@ import {observer} from "mobx-react-lite";
 import {useStore} from "../../store/RootStore.ts";
 import Cell from "./Cell/Cell.tsx";
 import type {ICellDTO} from "../../../../types/ICell.ts";
-import {GameUi} from "../../components/GameUI/GameUI.tsx";
 import {useParams} from "react-router-dom";
 import {GameOverModal} from "./GameOverModal/GameOverModal.tsx";
+import {GameUi} from "./GameUI/GameUI.tsx";
 
 export const Game = observer(() => {
             const {gameStore, socketStore} = useStore();

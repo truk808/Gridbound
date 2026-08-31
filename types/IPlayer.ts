@@ -1,6 +1,6 @@
 import type {ICharacter} from "./character/ICharacter.ts";
 import type {IDeckManager} from "./IDeckManager.ts";
-import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+import type {DeepFieldsOnly} from "../backend/helper/DeepFieldsOnly";
 
 export interface IPlayer {
     readonly id: string;

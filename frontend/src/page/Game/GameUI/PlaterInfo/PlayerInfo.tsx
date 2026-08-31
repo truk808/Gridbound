@@ -1,8 +1,8 @@
 import {CharacterInfoUi} from "./CharacterInfoUi/CharacterInfoUi.tsx";
 import {observer} from "mobx-react-lite";
 import styles from './PlayerInfo.module.css'
-import type {IPlayerDTO} from "../../../../../types/IPlayer.ts";
-import {useStore} from "../../../store/RootStore.ts";
+import {useStore} from "../../../../store/RootStore.ts";
+import type {IPlayerDTO} from "../../../../../../types/IPlayer.ts";
 
 interface PlayerInfoProps {
     player: IPlayerDTO;

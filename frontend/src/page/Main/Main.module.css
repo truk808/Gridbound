@@ -35,3 +35,7 @@
 .name {
     color: var(--text-color-white);
 }
+
+.version {
+    color: var(--text-color-white);
+}

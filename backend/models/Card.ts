@@ -2,11 +2,9 @@ import {ICard, ICardAction, ICardActionDTO, ICardDTO, type IConditionContext} fr
 import {IPlayer} from "../../types/IPlayer";
 import {ICharacter} from "../../types/character/ICharacter";
 import {ICell} from "../../types/ICell";
-import type {Player} from "../../frontend/src/models/Player";
-import type {Character} from "../../frontend/src/models/Character";
-import {createEffect} from "../../helper/createEffect";
+import {createEffect} from "../helper/createEffect";
 import {IField} from "../../types/IField";
-import {COUNT_CELL} from "../../config/gameConfig";
+import {COUNT_CELL} from "../../config/game.config";
 
 export class Card implements ICard {
     readonly instanceId: string;

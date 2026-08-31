@@ -1,5 +1,5 @@
 import type {ICard} from "../../types/ICard.ts";
-import {createCard} from "../../helper/createCard";
+import {createCard} from "../../backend/helper/createCard";
 
 export const SOLDIER_DECK_CONFIG: ICard[] = [
     createCard('HIT'),

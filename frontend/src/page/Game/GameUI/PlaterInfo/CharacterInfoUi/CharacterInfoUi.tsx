@@ -1,8 +1,8 @@
 import styles from "./CharacterInfoUi.module.css";
-import {Bar} from "../../../ui/Bar/Bar.tsx";
-import {StatusList} from "../../../ui/StatusList/StatusList.tsx";
 import {observer} from "mobx-react-lite";
-import type {ICharacterDTO} from "../../../../../../types/character/ICharacter.ts";
+import type {ICharacterDTO} from "../../../../../../../types/character/ICharacter.ts";
+import {Bar} from "../../../../../components/ui/Bar/Bar.tsx";
+import {StatusList} from "../../../../../components/StatusList/StatusList.tsx";
 
 
 interface CharacterInfoUiProps {

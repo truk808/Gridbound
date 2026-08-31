@@ -1,7 +1,7 @@
 import styles from './StatusList.module.css';
 import {observer} from "mobx-react-lite";
 import {StatusItem} from "../StatusItem/StatusItem.tsx";
-import type {IEffectDTO} from '../../../../../types/IEffect.ts';
+import type {IEffectDTO} from '../../../../types/IEffect.ts';
 
 interface StatusListProps {
     statuses: IEffectDTO[];

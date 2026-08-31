@@ -1,8 +1,8 @@
 import styles from "./TopPanel.module.css";
 import { PlayerInfo } from "../PlaterInfo/PlayerInfo.tsx";
-import { useStore } from "../../../store/RootStore.ts";
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
+import {useStore} from "../../../../store/RootStore.ts";
 
 export const TopPanel = observer(() => {
     const { gameStore } = useStore();

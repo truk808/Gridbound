@@ -1,5 +1,5 @@
-import {CARDS_CONFIG} from "../config/cards.config";
-import {Card} from "../backend/models/Card";
+import {CARDS_CONFIG} from "../../config/cards.config";
+import {Card} from "../models/Card";
 
 export function createCard(configKey: keyof typeof CARDS_CONFIG): Card {
     const config = CARDS_CONFIG[configKey];

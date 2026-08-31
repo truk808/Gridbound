@@ -1,4 +1,4 @@
-import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
+import type {DeepFieldsOnly} from "../backend/helper/DeepFieldsOnly";
 
 export interface ICell {
     readonly x: number;

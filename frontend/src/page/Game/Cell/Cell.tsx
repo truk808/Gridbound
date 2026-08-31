@@ -2,7 +2,7 @@ import styles from './Cell.module.css';
 import {observer} from "mobx-react-lite";
 import type {ICellDTO} from "../../../../../types/ICell.ts";
 import type {ICharacterDTO} from "../../../../../types/character/ICharacter.ts";
-import {Character} from "../../../components/characters/Character.tsx";
+import {Character} from "../../../components/Сharacter/Character.tsx";
 
 interface CellProps {
     character: {

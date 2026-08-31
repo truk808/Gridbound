@@ -1,10 +1,10 @@
 import styles from "./CardPanel.module.css"
-import {Card} from "../../../Card/Card.tsx";
-import type {ICardDTO} from "../../../../../../types/ICard.ts";
-import {observer} from "mobx-react-lite/src/observer.ts";
-import {useStore} from "../../../../store/RootStore.ts";
 import {useEffect, useState} from "react";
-import Modal from "../../../ui/modal/Modal.tsx";
+import {observer} from "mobx-react-lite";
+import {useStore} from "../../../../../store/RootStore.ts";
+import type {ICardDTO} from "../../../../../../../types/ICard.ts";
+import Modal from "../../../../../components/ui/modal/Modal.tsx";
+import {Card} from "../../../../../components/Card/Card.tsx";
 
 export const CardPanel = observer(() => {
     const {gameStore, socketStore} = useStore()
