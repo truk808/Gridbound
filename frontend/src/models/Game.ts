@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 
 import type {ICardDTO} from "../../../types/ICard.ts";
-import type {ICellDTO} from "../../../types/ICell.ts";
+import type {ICellColor, ICellDTO} from "../../../types/ICell.ts";
 import type {IGameDTO} from "../../../types/IGame.ts";
 import type {ICharacterDTO} from "../../../types/character/ICharacter.ts";
 import type {IPlayerDTO} from "../../../types/IPlayer.ts";
@@ -13,6 +13,8 @@ export class Game {
     selectedCard: ICardDTO | null = null;
     selectedCell: ICellDTO | null = null;
 
+    colorCells: ICellColor[] = [];
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -23,6 +25,10 @@ export class Game {
     get isHost() {return this._game?.hostId === this._localPlayerId;}
     get isCanTurn() {return this._game?.activePlayerId === this._localPlayerId;}
     get winer() {return (this._game?.players ?? []).find((player) => player.id === this.game?.winnerId);}
+
+    setColorCells(color: ICellColor[]) {
+        this.colorCells = color;
+    }
 
     setGame(game: IGameDTO) {
         this._game = {...game};

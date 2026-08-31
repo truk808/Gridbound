@@ -19,6 +19,10 @@ export const useGame = () => {
                     gameStore.setSelectedCard(null)
                     gameStore.setGame(data.game)
                     break
+                case 'cell_updated':
+                    gameStore.setColorCells(data.cellsColor)
+                    break;
+
             }
         });
         unsubscribe()

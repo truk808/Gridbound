@@ -11,12 +11,19 @@ export const useCardPanel = () => {
         gameStore.setSelectedCell(null)
         if(gameStore.selectedCard?.instanceId === card.instanceId) {
             gameStore.setSelectedCard(null)
+            socketStore.send({
+                method: 'get_selected_cells',
+                roomId: gameStore.game?.id ?? '',
+                playerId: gameStore.localPlayer?.id ?? '',
+            })
             return;
         }
         gameStore.setSelectedCard(card)
         socketStore.send({
-            method: '',
-
+            method: 'get_selected_cells',
+            roomId: gameStore.game?.id ?? '',
+            playerId: gameStore.localPlayer?.id ?? '',
+            card: card,
         })
     }
 

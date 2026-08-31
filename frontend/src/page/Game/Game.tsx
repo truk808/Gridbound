@@ -24,7 +24,7 @@ export const Game = observer(() => {
                                     char: gameStore.getCharacterByCell(cell.x),
                                     flip: !gameStore.isHost,
                                 }}
-                                selectColorHighlight={getColorHighlight(cell)}
+                                selectColorHighlight={gameStore.colorCells.find(c => c.x === cell.x)?.color ?? null}
                             />
                         )
                     })}

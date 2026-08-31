@@ -8,6 +8,7 @@ import {moveCharacter} from "./commands/moveCharacter";
 import {playCard} from "./commands/playCard";
 import {nextTurn} from "./commands/nextTurn";
 import {discardCard} from "./commands/discardCard";
+import {getSelectedCells} from "./commands/getSelectedCells";
 
 export const messageHandler = (msg: ClientMessage, ws: CustomWebSocket) => {
     if (msg.method === 'create_lobby') {
@@ -47,6 +48,10 @@ export const messageHandler = (msg: ClientMessage, ws: CustomWebSocket) => {
 
     if (msg.method === 'discard_card') {
         discardCard(msg, ws)
+    }
+
+    if (msg.method === 'get_selected_cells') {
+        getSelectedCells(msg, ws)
     }
 
 };

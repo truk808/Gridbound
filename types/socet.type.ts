@@ -1,7 +1,7 @@
 import type {IGameDTO} from "./IGame";
 import type {IPlayerDTO} from "./IPlayer";
 import type {CharacterName, ICharacterDTO} from "./character/ICharacter";
-import type {ICellDTO} from "./ICell";
+import {ICellColor, ICellDTO} from "./ICell";
 import type {ICardDTO} from "./ICard";
 
 
@@ -16,6 +16,7 @@ export type ServerMessage =
     | { event: 'turn_end'; roomId: string, game: IGameDTO, playerId: string }
     | { event: 'card_discarded'; roomId: string, game: IGameDTO, playerId: string }
     | { event: 'game_over'; roomId: string, game: IGameDTO, playerId: string }
+    | { event: 'cell_updated'; roomId: string, cellsColor: ICellColor[], playerId: string }
     | { event: 'error'; message: string };
 
 export type ClientMessage =
@@ -26,6 +27,7 @@ export type ClientMessage =
     | { method: 'move_character'; roomId: string, playerId: string, character: ICharacterDTO | null, targetCell: ICellDTO | null }
     | { method: 'play_card'; roomId: string, playerId: string, card: ICardDTO | null, targetCell: ICellDTO | null, selectedCell?: ICellDTO | null }
     | { method: 'next_turn'; roomId: string, playerId: string}
+    | { method: 'get_selected_cells'; roomId: string, playerId: string, card?: ICardDTO, cell?: ICellDTO}
     | { method: 'discard_card'; roomId: string, playerId: string, cardId: string
 }
 
