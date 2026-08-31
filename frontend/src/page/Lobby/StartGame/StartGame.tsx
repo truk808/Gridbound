@@ -5,14 +5,14 @@ import { ROUTES } from "../../../router/const.ts";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-export const StartGame = observer(() => {
+export const StartGame = observer(({turnDuration}) => {
     const { gameStore, socketStore } = useStore();
     const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = socketStore.onMessage((data) => {
-            if (data.event === 'game_started' && data.bool) {
-                navigate(ROUTES.GAME);
+            if (data.event === 'game_started') {
+                navigate(`${ROUTES.GAME}/${data.roomId}`);
             }
         });
 
@@ -27,7 +27,8 @@ export const StartGame = observer(() => {
         socketStore.send({
             method: 'start_game',
             roomId: gameStore.game?.id,
-            playerId: gameStore.localPlayerId
+            playerId: gameStore.localPlayerId,
+            turnDuration: turnDuration
         });
     };
 

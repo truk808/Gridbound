@@ -4,6 +4,7 @@ import { StartGame } from "./StartGame/StartGame";
 import { useParams } from "react-router-dom";
 import styles from './Lobby.module.css';
 
+
 const Lobby = observer(() => {
     const param = useParams();
 
@@ -27,12 +28,23 @@ const Lobby = observer(() => {
                 </div>
             </div>
 
+            {/*<div className={styles.settings}>*/}
+            {/*    <Settings*/}
+            {/*        endTurnTime={turnDuration}*/}
+            {/*        isTimerEnabled={isTimerEnabled}*/}
+            {/*        setEndTurnTime={setEndTurnTime}*/}
+            {/*        setIsTimerEnabled={setIsTimerEnabled}*/}
+            {/*    />*/}
+            {/*</div>*/}
+
             <div className={styles.mainContent}>
                 <PlayersInfo />
             </div>
 
             <div className={styles.start}>
-                <StartGame />
+                <StartGame
+                    turnDuration={null}
+                />
             </div>
         </div>
     );

@@ -15,13 +15,14 @@ export type ServerMessage =
     | { event: 'card_played'; roomId: string, game: IGameDTO, playerId: string }
     | { event: 'turn_end'; roomId: string, game: IGameDTO, playerId: string }
     | { event: 'card_discarded'; roomId: string, game: IGameDTO, playerId: string }
+    | { event: 'game_over'; roomId: string, game: IGameDTO, playerId: string }
     | { event: 'error'; message: string };
 
 export type ClientMessage =
-    | { method: 'create_lobby'; roomId: string, playerName: string, }
+    | { method: 'create_lobby'; roomId: string, playerName: string}
     | { method: 'join_lobby'; roomId: string, playerName: string }
     | { method: 'select_character'; roomId: string, playerId: string, characterName: string }
-    | { method: 'start_game'; roomId: string, playerId: string }
+    | { method: 'start_game'; roomId: string, playerId: string, turnDuration: number}
     | { method: 'move_character'; roomId: string, playerId: string, character: ICharacterDTO | null, targetCell: ICellDTO | null }
     | { method: 'play_card'; roomId: string, playerId: string, card: ICardDTO | null, targetCell: ICellDTO | null, selectedCell?: ICellDTO | null }
     | { method: 'next_turn'; roomId: string, playerId: string}

@@ -7,10 +7,12 @@ import {ICharacter} from "../../types/character/ICharacter";
 import {Card} from "../../frontend/src/models/Card";
 import {ICard, IConditionContext} from "../../types/ICard";
 import {platform} from "node:os";
+import {events} from '../models/EventBus'
 
 export class Game implements IGame {
     readonly id: string
     readonly field: IField = new Field(5)
+    private _turnDuration: number | null = null
     private _state: GameStatus = 'waiting'
     private _players: IPlayer[] = []
     private _activePlayerId: string | null = null
@@ -19,53 +21,42 @@ export class Game implements IGame {
     private _turn: number = 0
     private _turnTimeEnd: number | null = null
     private _timeStart: number | null = null
+    private _onGameOverCallback: ((winner: IPlayer | null) => void) | null = null;
 
-    get state() {
-        return this._state
-    }
-
-    get players() {
-        return this._players
-    }
-
-    get activePlayerId() {
-        return this._activePlayerId
-    }
-
-    get hostId() {
-        return this._hostId
-    }
-
-    get winnerId() {
-        return this._winnerId
-    }
-
-    get turn() {
-        return this._turn
-    }
-
-    get turnTimeEnd(): number | null {
-        return this._turnTimeEnd
-    }
-
-    get timeStart(): number | null {
-        return this._timeStart
-    }
-
-    get activePlayer() {
-        return this.getPlayerById(this._activePlayerId)
-    }
-
-    get host() {
-        return this.getPlayerById(this._hostId)
-    }
-
-    get winner() {
-        return this.getPlayerById(this._winnerId)
-    }
+    get state() {return this._state}
+    get players() {return this._players}
+    get activePlayerId() {return this._activePlayerId}
+    get hostId() {return this._hostId}
+    get winnerId() {return this._winnerId}
+    get turn() {return this._turn}
+    get turnTimeEnd(): number | null {return this._turnTimeEnd}
+    get timeStart(): number | null {return this._timeStart}
+    get activePlayer() {return this.getPlayerById(this._activePlayerId)}
+    get host() {return this.getPlayerById(this._hostId)}
+    get winner() {return this.getPlayerById(this._winnerId)}
+    get turnDuration() {return this._turnDuration}
 
     constructor(id?: string) {
         this.id = id ?? crypto.randomUUID();
+
+        events.on('character:died', (payload) => this.handleCharacterDeath(payload))
+    }
+
+    setTurnDuration(time: number) {
+        this._turnDuration = time;
+    }
+
+    getAlivePlayersCount(): number {
+        return this._players.filter(p => p.character && p.character.hp > 0).length;
+    }
+
+    isPlayerAlive(playerId: string): boolean {
+        const player = this.getPlayerById(playerId);
+        return player?.character ? player.character.hp > 0 : false;
+    }
+
+    setOnGameOver(callback: (winner: IPlayer | null) => void): void {
+        this._onGameOverCallback = callback;
     }
 
     setPlayers(players: IPlayer[]): void {
@@ -116,6 +107,33 @@ export class Game implements IGame {
         this._turnTimeEnd = +Date.now() + 30000
     }
 
+    private handleCharacterDeath(payload: { character: ICharacter }): void {
+        const deadCharacter = payload.character;
+        
+        if (this._state !== 'in_progress') return;
+
+        const alivePlayer = this._players.find(p => p.character && p.character.id !== deadCharacter.id && p.character.hp > 0);
+        
+        if (alivePlayer && alivePlayer.id) {
+            this.setWinner(alivePlayer.id);
+            this.endGame();
+
+            if (this._onGameOverCallback) {
+                this._onGameOverCallback(alivePlayer);
+            }
+
+            events.emit('game:over', { winner: alivePlayer });
+        }
+    }
+
+    setWinner(playerId: string): void {
+        this._winnerId = playerId;
+    }
+
+    endGame(): void {
+        this._state = 'ended'
+    }
+
     getCharacterByCell(cell: ICell | null): ICharacter | null {
         if (!cell) return null;
 
@@ -156,7 +174,9 @@ export class Game implements IGame {
     startGame(): void {
         this.setActivePlayerId(this.hostId);
         this.setTimeStart(+new Date())
-        this.setTurnTimeEnd(+new Date() + 30000)
+        if (this._turnDuration !== null) {
+            this.setTurnTimeEnd(+new Date() + (this._turnDuration * 1000))
+        }
         this.setState('in_progress')
     }
 
@@ -203,20 +223,22 @@ export class Game implements IGame {
 
     setHostId(playerId: string | null): void {
         this._hostId = playerId;
+
     }
 
     toDTO(): IGameDTO {
         return {
             id: this.id,
-            state: this._state,
             field: this.field.toDTO(),
+            turnDuration: this.turnDuration,
+            state: this._state,
             players: this._players.map(player => player.toDTO()),
             activePlayerId: this._activePlayerId,
             hostId: this._hostId,
             winnerId: this._winnerId,
             turn: this._turn,
             turnTimeEnd: this._turnTimeEnd,
-            timeStart: this._timeStart
+            timeStart: this._timeStart,
         };
     }
 }

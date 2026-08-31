@@ -1,5 +1,5 @@
 import {ClientMessage, ExtractClientMessage} from "../../../types/socet.type";
-import {CustomWebSocket} from "../../index";
+import {CustomWebSocket, broadcastToRoom} from "../../index";
 import {Player} from "../../models/Player";
 import {Game} from "../../models/Game";
 import {lobbies} from "../../state";
@@ -14,6 +14,15 @@ export const createLobby = (msg: ExtractClientMessage<'create_lobby'>, ws: Custo
     const game = new Game(msg.roomId);
     game.addPlayer(newPlayer);
     game.setHostId(newPlayer.id);
+
+    game.setOnGameOver((winner) => {
+        broadcastToRoom(msg.roomId, {
+            event: 'game_over',
+            roomId: msg.roomId,
+            game: game.toDTO(),
+            playerId: winner?.id ?? ''
+        });
+    });
 
     lobbies.set(msg.roomId, game);
     console.log(`Лобби игрока ${newPlayer.nickname} с ID комнаты ${msg.roomId} создано`);

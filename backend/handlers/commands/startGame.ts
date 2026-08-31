@@ -3,6 +3,8 @@ import {broadcastToRoom, CustomWebSocket} from "../../index";
 import {lobbies} from "../../state";
 import {CHARACTER_DECK} from "../../../config/characterDeck/characterDeck";
 import {createCard} from "../../../helper/createCard";
+import {IPlayer} from "../../../types/IPlayer";
+import {nextTurn} from "./nextTurn";
 
 export const startGame = (msg: ExtractClientMessage<'start_game'>, ws: CustomWebSocket) => {
     const game = lobbies.get(msg.roomId);

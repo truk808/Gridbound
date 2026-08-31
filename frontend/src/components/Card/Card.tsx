@@ -1,5 +1,6 @@
 import styles from "./Card.module.css";
 import {observer} from "mobx-react-lite";
+import {useEffect} from "react";
 
 interface CardProps {
     onClick: () => void;
@@ -18,10 +19,14 @@ export const Card = observer(({
                                   onClose,
                                   ap = 4,
                                   name = "Карта 4",
-                                  image = "/assets/card/sword.png",
+                                  image = "",
                                   description = "Наносит 2 ед урона",
                                   isSelected = false,
                               }: CardProps) => {
+    useEffect(() => {
+        console.log(image)
+    }, [image]);
+
     return (
         <div
             onClick={onClick}

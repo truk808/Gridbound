@@ -6,12 +6,17 @@ import Cell from "./Cell/Cell.tsx";
 import type {ICellDTO} from "../../../../types/ICell.ts";
 import {GameUi} from "../../components/GameUI/GameUI.tsx";
 import {useParams} from "react-router-dom";
+import {GameOverModal} from "./GameOverModal/GameOverModal.tsx";
 
 export const Game = observer(() => {
             const {gameStore, socketStore} = useStore();
             const roomId = useParams();
 
             if (!roomId.id) return
+
+            useEffect(() => {
+                console.log('asdsadasd')
+            }, []);
 
             useEffect(() => {
                 const unsubscribe = socketStore.onMessage((data) => {
@@ -31,6 +36,11 @@ export const Game = observer(() => {
             }, []);
 
             function onClickHandle(cell: ICellDTO) {
+                if (gameStore.game?.state !== 'in_progress') {
+                    console.log('Game: игра не началась или закончилась')
+                    return;
+                }
+
                 const localPlayer = gameStore.localPlayer
                 const isCanTurn = gameStore.isCanTurn
 
@@ -122,6 +132,7 @@ export const Game = observer(() => {
             return (
                 <div className={styles.arena}>
                     <GameUi/>
+                    <GameOverModal/>
                     <div className={styles.grid}>
                         <div style={{display: "flex", gap: "10px"}}>
                             {gameStore.game.field.cells.map((cell) => {

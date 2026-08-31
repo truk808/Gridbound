@@ -1,10 +1,9 @@
 import type {IField} from "./IField.ts";
 import type {ICell} from "./ICell.ts";
 import type {ICharacter} from "./character/ICharacter.ts";
-import type {Card} from "../frontend/src/models/Card.ts";
 import type {IPlayer} from "./IPlayer";
 import type {DeepFieldsOnly} from "../helper/DeepFieldsOnly";
-import {ICard} from "./ICard";
+import type {ICard} from "./ICard";
 
 export type GameStatus = 'waiting' | 'in_progress' | 'ended';
 
@@ -19,8 +18,13 @@ export interface IGame {
     turn: number
     timeStart: number | null
     turnTimeEnd: number | null
+    turnDuration: number | null
 
     setPlayers(players: IPlayer[]): void
+    setTurnDuration(time: number): void
+    endGame(): void
+    setWinner(playerId: string): void
+    setOnGameOver(callback: (winner: IPlayer | null) => void): void
     getPlayerById(id: string): IPlayer | null
     isCanStart(): boolean
     startGame(): void
@@ -32,6 +36,8 @@ export interface IGame {
     endTurn(): void
     setActivePlayerId(playerId: string): void
     setHostId(playerId: string): void
+    getAlivePlayersCount(): number
+    isPlayerAlive(playerId: string): boolean
     toDTO(): IGameDTO
 }
 

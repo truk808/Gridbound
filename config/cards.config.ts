@@ -17,7 +17,7 @@ export const CARDS_CONFIG = {
         name: 'Удар',
         description: 'Наносит 8 урона.',
         apCost: 1,
-        image: '',
+        image: '/assets/card/hit.jpg',
         radius: 1,
         actions: [
             {
@@ -32,7 +32,7 @@ export const CARDS_CONFIG = {
         name: 'Блок',
         description: 'Дает 4 защиты.',
         apCost: 1,
-        image: '',
+        image: '/assets/card/block.jpg',
         radius: 0,
         actions: [
             {
@@ -46,7 +46,7 @@ export const CARDS_CONFIG = {
         name: 'Энергия',
         description: 'Дает 1 энергию.',
         apCost: 0,
-        image: './assets/card/energy.png',
+        image: '/assets/card/energy.png',
         radius: 0,
         actions: [
             {
@@ -60,7 +60,7 @@ export const CARDS_CONFIG = {
         name: 'Регенерация',
         description: 'Дает эффект регенерация 3ур на 3 хода.',
         apCost: 2,
-        image: '',
+        image: '/assets/card/regeneration.jpg',
         radius: 0,
         actions: [
             {
@@ -80,7 +80,7 @@ export const CARDS_CONFIG = {
         name: 'Колба с ядом',
         description: 'Дает эффект "ядовитый удар"',
         apCost: 2,
-        image: '',
+        image: '/assets/card/flask_with_poisen.jpg',
         radius: 0,
         actions: [
             {
@@ -100,7 +100,7 @@ export const CARDS_CONFIG = {
         name: 'Ловкость',
         description: 'дает использовавшему 1 энергию и наносит 4 урона цели',
         apCost: 1,
-        image: '',
+        image: '/assets/card/agility.jpg',
         radius: 1,
         actions: [
             {
@@ -123,7 +123,7 @@ export const CARDS_CONFIG = {
         name: 'Стойка',
         description: 'дает 10 защиты',
         apCost: 1,
-        image: '',
+        image: '/assets/card/stance.jpg',
         radius: 0,
         actions: [
             {
@@ -139,7 +139,7 @@ export const CARDS_CONFIG = {
         name: 'Рывок',
         description: 'переместите персонажа на 2 клетки',
         apCost: 2,
-        image: '',
+        image: '/assets/card/dash.jpg',
         radius: 2,
         actions: [
             {
@@ -154,9 +154,9 @@ export const CARDS_CONFIG = {
     FENCING: {
         id: 'FENCING',
         name: 'Фехтование',
-        description: 'наносит 1 урона 3 раза',
+        description: 'наносит 1 урон 3 раза',
         apCost: 1,
-        image: '',
+        image: '/assets/card/fencing.jpg',
         radius: 1,
         actions: [
             {
@@ -173,9 +173,9 @@ export const CARDS_CONFIG = {
     NEED_TO_THINK_ABOUT_IT: {
         id: 'NEED_TO_THINK_ABOUT_IT',
         name: 'Нужно подумать',
-        description: 'Сбросьте эту карту и получите 2',
+        description: 'Примените эту карту и получите 2',
         apCost: 0,
-        image: '',
+        image: '/assets/card/need_to_think_about_it.jpg',
         radius: 0,
         actions: [
             {
@@ -192,7 +192,7 @@ export const CARDS_CONFIG = {
         name: 'Ярость орка',
         description: 'дает эффект ярость на 1 ход',
         apCost: 1,
-        image: '',
+        image: '/assets/card/orc_rage.jpg',
         radius: 0,
         actions: [
             {
@@ -208,7 +208,7 @@ export const CARDS_CONFIG = {
         name: 'Боль',
         description: 'Получите 8 урона и эффект ярость 3ур',
         apCost: 2,
-        image: '',
+        image: '/assets/card/pain.jpg',
         radius: 0,
         actions: [
             {
@@ -224,7 +224,7 @@ export const CARDS_CONFIG = {
         name: 'Тяжелый удар',
         description: 'Наносит 20 урона цели',
         apCost: 2,
-        image: '',
+        image: '/assets/card/haevy_hit.jpg',
         radius: 1,
         actions: [
             {
@@ -241,7 +241,7 @@ export const CARDS_CONFIG = {
         name: 'Пинок',
         description: 'наносит 4 урона и отталкивает цель на 1 клетку',
         apCost: 1,
-        image: '',
+        image: '/assets/card/kick.jpg',
         radius: 1,
         actions: [
             {
@@ -259,7 +259,7 @@ export const CARDS_CONFIG = {
         name: 'Тупик',
         description: 'Если цель находится в углу, накладывает эффект контузия на 2 хода',
         apCost: 0,
-        image: '',
+        image: '/assets/card/dead_end.jpg',
         radius: 1,
         actions: [
             {
@@ -276,7 +276,7 @@ export const CARDS_CONFIG = {
         name: 'Игра мускулами',
         description: 'дает эффекты на 2 хода: невосприимчивость и контузия',
         apCost: 2,
-        image: '',
+        image: '/assets/card/muscle_flexing.jpg',
         radius: 0,
         actions: [
             {

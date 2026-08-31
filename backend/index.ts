@@ -3,8 +3,8 @@ import expressWs from 'express-ws';
 import type {ClientMessage, ServerMessage} from '../types/socet.type'
 import type { WebSocket } from 'ws';
 import {lobbies} from "./state";
+import {turnTimers} from './state'
 import {messageHandler} from "./handlers/messageHandler";
-import {debuglog} from "node:util";
 
 const expressWsInstance = expressWs(express());
 const app = expressWsInstance.app;

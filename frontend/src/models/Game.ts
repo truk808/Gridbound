@@ -17,25 +17,12 @@ export class Game {
         makeAutoObservable(this);
     }
 
-    get game() {
-        return this._game;
-    }
-
-    get localPlayerId() {
-        return this._localPlayerId;
-    }
-
-    get localPlayer() {
-        return (this._game?.players ?? []).find((player) => player.id === this.localPlayerId);
-    }
-
-    get isHost() {
-        return this._game?.hostId === this._localPlayerId;
-    }
-
-    get isCanTurn() {
-        return this._game?.activePlayerId === this._localPlayerId;
-    }
+    get game() {return this._game;}
+    get localPlayerId() {return this._localPlayerId;}
+    get localPlayer() {return (this._game?.players ?? []).find((player) => player.id === this.localPlayerId);}
+    get isHost() {return this._game?.hostId === this._localPlayerId;}
+    get isCanTurn() {return this._game?.activePlayerId === this._localPlayerId;}
+    get winer() {return (this._game?.players ?? []).find((player) => player.id === this.game?.winnerId);}
 
     setGame(game: IGameDTO) {
         this._game = {...game};

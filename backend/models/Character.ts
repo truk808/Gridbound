@@ -3,7 +3,7 @@ import {ICell, ICellDTO} from "../../types/ICell";
 import {IEffect, StatusType} from "../../types/IEffect";
 import {CharacterName} from "../../config/characters.config";
 import {createEffect} from "../../helper/createEffect";
-import {events} from "../../frontend/src/models/EventBus";
+import {events} from "./EventBus";
 
 export class Character implements ICharacter {
     readonly id: string;
@@ -80,6 +80,10 @@ export class Character implements ICharacter {
             this._cell.setIsOwn(false);
             this._cell = null
         }
+
+        events.emit('character:died', {
+            character: this
+        })
     }
 
     hasStatus(type: StatusType): boolean {
