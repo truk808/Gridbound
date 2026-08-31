@@ -2,14 +2,14 @@ import { useState } from "react";
 import styles from "./Dropdown.module.css";
 
 interface DropdownItem {
-    id: number;
+    id: string;
     label: string;
 }
 
 interface DropdownProps<T extends DropdownItem> {
     items: T[];
-    selectedId: number | null;
-    onChange: (ids: number | null) => void;
+    selectedId: string | null;
+    onChange: (ids: string | null) => void;
     placeholder?: string;
 }
 
@@ -21,7 +21,7 @@ export const Dropdown = <T extends DropdownItem>({
                                                             }: DropdownProps<T>) => {
     const [open, setOpen] = useState(false);
 
-    const toggle = (id: number | null) => {
+    const toggle = (id: string | null) => {
         onChange(
            id
         );
@@ -59,7 +59,7 @@ export const Dropdown = <T extends DropdownItem>({
                         </label>
                     ))}
 
-                    {(selectedId ?? 0) > 0 && (
+                    {(selectedId ?? 0) != 0 && (
                         <button
                             type="button"
                             className={styles.reset}

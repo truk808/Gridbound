@@ -1,0 +1,91 @@
+.vsDivider {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--primery-base-color);
+    color: var(--primery-color);
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.playerCard {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    height: 420px;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--base-color-darck);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.25s ease;
+}
+
+.playerCard.isLocal {
+    border-color: var(--primery-color);
+}
+
+.hostBadge {
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    background: var(--primery-base-color);
+    border: 1px solid var(--primery-border-color);
+    color: var(--text-color-muted);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.playerHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+}
+
+.nickname {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color-white);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.avatarArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: #0b0e14;
+    font-size: 48px;
+    overflow: hidden;
+}
+
+.dropdownContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.characterName {
+    font-size: 14px;
+    color: var(--text-color-white);
+}

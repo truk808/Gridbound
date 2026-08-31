@@ -1,9 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { PlayersInfo } from "./PlayerInfo/PlayerInfo";
 import { StartGame } from "./StartGame/StartGame";
 import { useParams } from "react-router-dom";
 import styles from './Lobby.module.css';
-
+import {PlayersInfo} from "./PlayersInfo/PlayersInfo.tsx";
 
 const Lobby = observer(() => {
     const param = useParams();

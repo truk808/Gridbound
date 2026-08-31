@@ -1,6 +1,6 @@
 .startButton {
-    background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%);
-    border: 1px solid #b91c1c;
+    background: linear-gradient(180deg, var(--primery-color) 0%, #422c01 100%);
+    border: 1px solid var(--border-color);
     color: #ffffff;
     font-size: 18px;
     font-weight: 800;
@@ -9,7 +9,7 @@
     padding: 16px 48px;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(185, 28, 28, 0.4);
+    box-shadow: 0 4px 15px var(--primery-color);
     transition: all 0.2s ease;
 }
 
@@ -24,9 +24,9 @@
 }
 
 .startButton:disabled {
-    background: #1e293b;
-    border-color: #334155;
-    color: #64748b;
+    background: var(--base-color);
+    border-color: var(--border-color);
+    color: var(--text-color-muted);
     box-shadow: none;
     cursor: not-allowed;
     transform: none;
