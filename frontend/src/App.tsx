@@ -7,7 +7,7 @@ export function App() {
     const {socketStore} = useStore();
 
     useEffect(() => {
-        socketStore.connect('ws://localhost:5000')
+        socketStore.connect(import.meta.env.VITE_WS_URL)
     }, [socketStore])
 
     return (

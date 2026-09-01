@@ -7,19 +7,13 @@ export class SocketStore {
     private listeners: Array<(data: any) => void> = [];
     private messageQueue: any[] = [];
 
-    get lis() {
-        return this.socket;
-    }
-
     constructor() {
         makeAutoObservable(this);
     }
 
     connect(url: string) {
         if (this.socket) return;
-
         this.socket = new WebSocket(url);
-
         this.socket.onopen = () => {
             this.setIsConnected(true);
             console.log('WS подключен');
@@ -28,11 +22,7 @@ export class SocketStore {
         this.socket.onmessage = (event: MessageEvent) => {
             try {
                 const data = JSON.parse(event.data);
-
-                // ВСЕГДА добавляй в очередь
                 this.messageQueue.push(data);
-                
-                // И отправи всем текущим слушателям
                 this.listeners.forEach((callback) => callback(data));
             } catch (e) {
                 console.error('Ошибка парсинга WS сообщения:', e);
