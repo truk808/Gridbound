@@ -6,7 +6,7 @@
     "dev": "tsx watch index.ts",
     "start": "tsx index.ts",
     "build": "tsc -p tsconfig.json",
-    "start:prod": "node dist/index.js"
+    "start:prod": "node ../dist/backend/index.js"
   },
   "keywords": [],
   "author": "",
