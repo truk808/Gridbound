@@ -37,15 +37,13 @@ const handleTurnTimeout = (roomId: string) => {
     const game = lobbies.get(roomId);
     if (!game || game.state !== 'in_progress') return;
 
-    // Передаем ход
     game.endTurn();
 
-    // Запускаем новый таймер для следующего игрока
     startTurnTimer(roomId);
 
-    // Оповещаем всех игроков в комнате
-    broadcastToRoom(roomId, {
-        event: 'turn_ended',
-        game: game.toDTO()
-    });
+    // broadcastToRoom(roomId, {
+    //     event: 'turn_end',
+    //     game: game.toDTO()
+    //
+    // });
 };

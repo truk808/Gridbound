@@ -3,7 +3,7 @@ import type {GameEvent, GameEventPayloads} from "../types/GameEventPayloads.ts";
 type EventCallback<T> = (payload: T) => void;
 
 export class EventBus {
-    private listeners: Record<GameEvent, Function[]> = {};
+    private listeners: Record<GameEvent, Function[]> = {} as Record<GameEvent, Function[]>;
 
     on<K extends GameEvent>(event: K, callback: EventCallback<GameEventPayloads[K]>): () => void {
         if (!this.listeners[event]) {

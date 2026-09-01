@@ -24,7 +24,7 @@ export const selectCharacter = (msg: ExtractClientMessage<'select_character'>, w
         return;
     }
 
-    const character = createCharacter(msg.characterName);
+    const character = createCharacter(msg.characterName as import('../../../types/character/ICharacter').CharacterName);
     if (msg.playerId === game.hostId) {
         character.setCell(game.field.getCellByX(0))
     } else {

@@ -6,7 +6,7 @@ export function createCharacter(name: CharacterName): Character {
     const character = CHARACTER_CONFIG[name];
 
     return new Character(
-        character.name,
+        character.name as CharacterName,
         character.maxHp
     )
 }
