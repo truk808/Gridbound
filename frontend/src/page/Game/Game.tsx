@@ -1,36 +1,35 @@
-import styles from './Game.module.css'
-import {observer} from "mobx-react-lite";
+import styles from './Game.module.css';
+import { observer } from "mobx-react-lite";
 import Cell from "./Cell/Cell.tsx";
-import {GameOverModal} from "./GameOverModal/GameOverModal.tsx";
-import {GameUi} from "./GameUI/GameUI.tsx";
-import {useGame} from "./useGame.ts";
+import { GameOverModal } from "./GameOverModal/GameOverModal.tsx";
+import { GameUi } from "./GameUI/GameUI.tsx";
+import { useGame } from "./useGame.ts";
 
 export const Game = observer(() => {
-    const { getColorHighlight, onClickHandle, gameStore} = useGame()
+    const { onClickHandle, gameStore } = useGame();
 
     return (
         <div className={styles.arena}>
-            <GameUi/>
-            <GameOverModal/>
+            <GameUi />
+            <GameOverModal />
             <div className={styles.grid}>
-                <div style={{display: "flex", gap: "10px"}}>
+                <div style={{ display: "flex", gap: "10px" }}>
                     {gameStore.game?.field.cells.map((cell) => {
+                        const char = gameStore.getCharacterByCell(cell.x);
+                        const owner = gameStore.game?.players.find(p => p.character?.id === char?.id);
+                        const isSecondPlayer = owner && owner.id !== gameStore.game?.hostId;
                         return (
                             <Cell
                                 key={`cell_${cell.x}`}
                                 cell={cell}
                                 onClick={() => onClickHandle(cell)}
-                                character={{
-                                    char: gameStore.getCharacterByCell(cell.x),
-                                    flip: !gameStore.isHost,
-                                }}
+                                character={{char: char, flip: Boolean(isSecondPlayer)}}
                                 selectColorHighlight={gameStore.colorCells.find(c => c.x === cell.x)?.color ?? null}
                             />
-                        )
+                        );
                     })}
                 </div>
             </div>
         </div>
-
     );
 });

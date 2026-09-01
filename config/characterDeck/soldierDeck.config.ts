@@ -18,7 +18,7 @@ export const SOLDIER_DECK_CONFIG: ICard[] = [
     createCard('BLOCK'),
     createCard('ENERGY'),
     createCard('ENERGY'),
-    //
+
     createCard('AGILITY'),
     createCard('AGILITY'),
     createCard('AGILITY'),

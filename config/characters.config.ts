@@ -4,7 +4,7 @@ export const CHARACTER_CONFIG = {
     soldier: {
         id: '1',
         name: 'soldier',
-        maxHp: 100,
+        maxHp: 1,
     },
     orc: {
         id: '2',

@@ -55,9 +55,16 @@ export const useGame = () => {
                 targetCell: cell,
                 card: gameStore.selectedCard,
             })
+            socketStore.send({
+                method: "get_selected_cells",
+                roomId: roomId.id ?? '',
+                playerId: localPlayer.id,
+            })
             // console.log(game.activePlayer?.cards.selectedCard, field.selectedCell)
             gameStore.setSelectedCard(null)
             gameStore.setSelectedCell(null)
+
+
             return;
         }
 
@@ -72,12 +79,23 @@ export const useGame = () => {
                     character: localPlayer.character,
                 })
                 gameStore.setSelectedCell(null);
+                socketStore.send({
+                    method: "get_selected_cells",
+                    roomId: roomId.id ?? '',
+                    playerId: localPlayer.id,
+                })
             }
         } else {
             if (localPlayer.character === gameStore.getCharacterByCell(cell.x)) {
                 if (gameStore.getCharacterByCell(cell.x)) {
                     gameStore.setSelectedCell(cell)
                 }
+                socketStore.send({
+                    method: "get_selected_cells",
+                    roomId: roomId.id ?? '',
+                    playerId: localPlayer.id,
+                    cell: cell,
+                })
             }
 
         }

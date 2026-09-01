@@ -52,6 +52,8 @@ export class Decks implements IDeckManager{
     }
 
     recycleDiscard(): void {
+        this._deck = this._discardCards
+        this._discardCards = []
     }
 
     discardCard(cardId: string | null ): void {
@@ -73,7 +75,7 @@ export class Decks implements IDeckManager{
 
     takeCard(): void {
         if (this._deck.length <= 0 && this._discardCards.length != 0) {
-            this.recycleDiscard();
+            // this.recycleDiscard();
         } else if (this._deck.length <= 0 && this._discardCards.length <= 0) {
             return
         }

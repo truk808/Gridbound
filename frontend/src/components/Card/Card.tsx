@@ -23,10 +23,6 @@ export const Card = observer(({
                                   description = "Наносит 2 ед урона",
                                   isSelected = false,
                               }: CardProps) => {
-    useEffect(() => {
-        console.log(image)
-    }, [image]);
-
     return (
         <div
             onClick={onClick}

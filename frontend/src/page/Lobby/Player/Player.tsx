@@ -28,7 +28,7 @@ export const Player = ({index, player, characterList, chooseCharacter}: PlayerPr
                     <Character
                         character={player.character}
                         state={'idle'}
-                        flip={!isHost}
+                        flip={index > 0}
                     />
                 </div>
 

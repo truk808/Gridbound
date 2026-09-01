@@ -6,6 +6,16 @@ import { ROUTES } from "../../../router/const.ts";
 import { observer } from "mobx-react-lite";
 import styles from './GameOverModal.module.css';
 
+const formatGameDuration = (timeStart: number | null | undefined): string => {
+    if (!timeStart) return '—';
+
+    const diffInSeconds = Math.max(0, Math.floor((Date.now() - timeStart) / 1000));
+    const minutes = Math.floor(diffInSeconds / 60);
+    const seconds = diffInSeconds % 60;
+
+    return `${minutes}м ${seconds}с`;
+};
+
 export const GameOverModal = observer(() => {
     const { gameStore, socketStore } = useStore();
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +32,7 @@ export const GameOverModal = observer(() => {
         });
 
         return () => unsubscribe();
-    }, [socketStore]);
+    }, [socketStore, gameStore]);
 
     const handleClose = () => {
         navigate(ROUTES.MAIN);
@@ -55,12 +65,14 @@ export const GameOverModal = observer(() => {
                     </div>
                     <div className={styles.statRow}>
                         <span className={styles.statLabel}>Время:</span>
-                        <span className={styles.statValue}>—</span>
+                        <span className={styles.statValue}>
+                            {formatGameDuration(gameStore.game?.timeStart)}
+                        </span>
                     </div>
                 </div>
 
                 <button className={styles.button} onClick={handleClose}>
-                   Вернуться
+                    Вернуться
                 </button>
             </div>
         </Modal>

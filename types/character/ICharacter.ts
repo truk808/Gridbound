@@ -13,11 +13,12 @@ export interface ICharacter {
     status: IEffect[];
     cell: ICell | null;
 
+    setHp(hp: number): void
     setArmorTime(value: number): void;
     setCell(cell: ICell | null): void
     setArmor(armor: number): void
     hasStatus(type: StatusType): boolean
-    isCanMove(target: ICell | null): boolean;
+    isCanMove(target: ICell | null, ap?: number): boolean;
     move(target: ICell | null): void
     addEffect(effect: IEffect): void
     removeEffect(effect: IEffect): void

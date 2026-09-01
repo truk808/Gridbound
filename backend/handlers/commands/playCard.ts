@@ -36,6 +36,10 @@ export const playCard = (msg: ExtractClientMessage<'play_card'>, ws: CustomWebSo
 
     if (game.isCanPlayCard(player, card, targetCell)) {
         game.playCard(player, card, targetCell);
+        if(player.cards.deck.length <= 0) {
+            player.character?.setHp(player.character.hp - 16)
+            player.cards.recycleDiscard()
+        }
         console.log(`игрок ${player.nickname} разыграл карту ${card.name} на поле ${targetCell.x}`)
     } else {
         ws.send(JSON.stringify({

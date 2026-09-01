@@ -4,9 +4,7 @@ import {IPlayer} from "../../types/IPlayer";
 import {IField} from "../../types/IField";
 import {ICell} from "../../types/ICell";
 import {ICharacter} from "../../types/character/ICharacter";
-import {Card} from "../../frontend/src/models/Card";
 import {ICard, IConditionContext} from "../../types/ICard";
-import {platform} from "node:os";
 import {events} from '../models/EventBus'
 
 export class Game implements IGame {

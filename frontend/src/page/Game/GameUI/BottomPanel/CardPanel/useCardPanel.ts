@@ -39,10 +39,11 @@ export const useCardPanel = () => {
 
     //!!! карты должны перемешиваться на сервере
     const deckCards = useMemo(() => {
+        console.log(1123123124)
         return gameStore.localPlayer?.cards.deck
             .slice()
             .sort((a, b) => a.name.localeCompare(b.name))
-    }, [])
+    }, [gameStore.localPlayer?.cards.deck])
 
     return {
         gameStore: gameStore,

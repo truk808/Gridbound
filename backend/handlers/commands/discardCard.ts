@@ -30,9 +30,16 @@ export const discardCard = (msg: ExtractClientMessage<'discard_card'>, ws: Custo
         return;
     }
 
+    if (player.ap - 1 < 0) return;
+
     player.cards.discardCard(msg.cardId);
     player.setAP(player.ap - 1)
     player.cards.takeCard()
+
+    if(player.cards.deck.length <= 0) {
+        player.character?.setHp(player.character.hp - 16)
+        player.cards.recycleDiscard()
+    }
 
     // broadcastToRoom(msg.roomId, {
         // event: 'card_discarded',

@@ -1,7 +1,6 @@
-import {ICharacter, ICharacterDTO} from "../../types/character/ICharacter";
+import {CharacterName, ICharacter, ICharacterDTO} from "../../types/character/ICharacter";
 import {ICell, ICellDTO} from "../../types/ICell";
 import {IEffect, StatusType} from "../../types/IEffect";
-import {CharacterName} from "../../config/characters.config";
 import {createEffect} from "../helper/createEffect";
 import {events} from "./EventBus";
 
@@ -35,6 +34,11 @@ export class Character implements ICharacter {
     }
 
     get armorTime(): number { return this._armor; }
+
+    setHp(hp: number): void {
+        this._hp = hp;
+        if  (this._hp <= 0) this.die()
+    }
 
     addArmor(armor: number): void {
         this._armor += armor;
@@ -90,13 +94,18 @@ export class Character implements ICharacter {
         return this._status.some((effect) => effect.type === type);
     }
 
-    isCanMove(target: ICell | null): boolean {
+    isCanMove(target: ICell | null, ap?: number): boolean {
         if (target && this.cell) {
             if (target.isOwn) return false;
             if (Math.abs(target.x - this.cell.x) !== this.distanceToMove) return false;
         }
 
-        console.log('check stun', this.hasStatus('stun'));
+        // console.log('ap', ap, ap && ap >= 0)
+        if (ap) {
+            console.log('appppppppppp', ap)
+            if ((ap <= 0)) return false;
+        }
+
         if (this.hasStatus('stun')) {
             console.log('stun', target);
             return false;
