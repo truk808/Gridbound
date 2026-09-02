@@ -4,6 +4,7 @@ import Cell from "./Cell/Cell.tsx";
 import { GameOverModal } from "./GameOverModal/GameOverModal.tsx";
 import { GameUi } from "./GameUI/GameUI.tsx";
 import { useGame } from "./useGame.ts";
+import {ICellColor} from "../../../../types/ICell.ts";
 
 export const Game = observer(() => {
     const { onClickHandle, gameStore } = useGame();
@@ -24,7 +25,7 @@ export const Game = observer(() => {
                                 cell={cell}
                                 onClick={() => onClickHandle(cell)}
                                 character={{char: char, flip: Boolean(isSecondPlayer)}}
-                                selectColorHighlight={gameStore.colorCells.find(c => c.x === cell.x)?.color ?? null}
+                                selectColorHighlight={(gameStore.colorCells.find(c => c.x === cell.x)?.color ?? null) as "red" | "yellow" | null}
                             />
                         );
                     })}

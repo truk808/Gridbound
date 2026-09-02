@@ -1,7 +1,7 @@
 import type {IGameDTO} from "./IGame";
 import type {IPlayerDTO} from "./IPlayer";
 import type {CharacterName, ICharacterDTO} from "./character/ICharacter";
-import {ICellColor, ICellDTO} from "./ICell";
+import type {ICellColor, ICellDTO} from "./ICell";
 import type {ICardDTO} from "./ICard";
 
 

@@ -1,8 +1,15 @@
-import { type ChangeEvent, useState } from "react";
+import { type ChangeEvent } from "react";
 import styles from "./Settings.module.css";
 import {useStore} from "../../../store/RootStore.ts";
 
-export const Settings = ({isTimerEnabled, setIsTimerEnabled, endTurnTime, setEndTurnTime}) => {
+interface SettingsProps {
+    isTimerEnabled: boolean;
+    setIsTimerEnabled: (b: any) => void;
+    endTurnTime: number;
+    setEndTurnTime: (b: number) => void;
+}
+
+export const Settings = ({isTimerEnabled, setIsTimerEnabled, endTurnTime, setEndTurnTime}: SettingsProps) => {
     const {gameStore} = useStore()
 
     const handleToggle = () => {
