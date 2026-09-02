@@ -4,7 +4,6 @@ import Cell from "./Cell/Cell.tsx";
 import { GameOverModal } from "./GameOverModal/GameOverModal.tsx";
 import { GameUi } from "./GameUI/GameUI.tsx";
 import { useGame } from "./useGame.ts";
-import {ICellColor} from "../../../../types/ICell.ts";
 
 export const Game = observer(() => {
     const { onClickHandle, gameStore } = useGame();
