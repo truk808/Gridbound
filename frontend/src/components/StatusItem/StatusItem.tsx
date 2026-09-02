@@ -10,7 +10,7 @@ interface StatusItemProps {
 }
 
 export const StatusItem = observer(({ type, level, duration }: StatusItemProps) => {
-    const statusConfig = EFFECTS_CONFIG[type];
+    const statusConfig = EFFECTS_CONFIG[type as keyof typeof EFFECTS_CONFIG];
 
     return (
         <div className={styles.statusItem}>

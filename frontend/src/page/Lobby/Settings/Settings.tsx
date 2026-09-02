@@ -6,14 +6,14 @@ interface SettingsProps {
     isTimerEnabled: boolean;
     setIsTimerEnabled: (b: any) => void;
     endTurnTime: number;
-    setEndTurnTime: (b: number) => void;
+    setEndTurnTime: (b: number | null) => void;
 }
 
 export const Settings = ({isTimerEnabled, setIsTimerEnabled, endTurnTime, setEndTurnTime}: SettingsProps) => {
     const {gameStore} = useStore()
 
     const handleToggle = () => {
-        setIsTimerEnabled((prev) => {
+        setIsTimerEnabled((prev: any) => {
             const nextState = !prev;
             if (nextState) {
                 setEndTurnTime(30);
