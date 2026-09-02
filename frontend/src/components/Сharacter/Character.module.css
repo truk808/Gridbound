@@ -28,9 +28,9 @@
 }
 
 .soldier {
-    background-image: url('./assets/Soldier_Idle.png');
+    background-image: url('/assets/Soldier_Idle.png');
 }
 
 .orc {
-    background-image: url('./assets/Orc_Idle.png');
+    background-image: url('/assets/Orc_Idle.png');
 }
