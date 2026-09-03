@@ -1,5 +1,5 @@
 import {useStore} from "../../../../store/RootStore.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ROUTES} from "../../../../router/const.ts";
 
@@ -10,6 +10,10 @@ export const useJoinToLobby = () => {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [hasSavedUser, setHasSavedUser] = useState(false);
+
+    useEffect(() => {
+        console.log(localStorage.getItem('user_name'))
+    }, [localStorage.getItem('user_name')])
 
     function joinToLobby(playerName: string, roomId: string) {
         if (!playerName.trim() || !roomId.trim()) return;
