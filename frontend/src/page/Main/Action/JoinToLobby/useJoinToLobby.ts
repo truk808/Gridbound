@@ -38,6 +38,8 @@ export const useJoinToLobby = () => {
 
     function handleOpenModal() {
         const savedUser = localStorage.getItem('user_name');
+        console.log(savedUser)
+        console.log(hasSavedUser)
         if (savedUser) {
             setName(savedUser);
             setHasSavedUser(true);

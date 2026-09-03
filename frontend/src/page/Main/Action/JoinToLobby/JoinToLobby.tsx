@@ -12,7 +12,7 @@ export const JoinToLobby = () => {
                 setActive={modal.setIisOpen}
             >
                 <h2 className={styles.title}> Присоединиться </h2>
-                {!hasSavedUser && (
+                {!name.name && (
                     <input
                         type="text"
                         placeholder="Ваше имя"
